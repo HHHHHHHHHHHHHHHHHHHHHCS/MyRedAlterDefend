@@ -5,28 +5,71 @@ using UnityEngine;
 public abstract class AbsSceneState
 {
     public string SceneName { get; private set; }
+    public SceneController SceneController { get; private set; }
     public SceneController.SceneState SceneState { get; private set; }
 
-    public AbsSceneState(SceneController ctrl
+    protected bool isFirst;
+
+    public AbsSceneState(SceneController _ctrl
         , SceneController.SceneState _sceneState, string _sceneName)
     {
-        ctrl.AddState(_sceneState, this);
+        _ctrl.AddState(_sceneState, this);
+        SceneController = _ctrl;
         SceneState = _sceneState;
         SceneName = _sceneName;
     }
 
     /// <summary>
+    /// 初始化的时候调用
+    /// </summary>
+    public void StateAwake()
+    {
+        isFirst = true;
+        StateAwakeThing();
+    }
+    protected virtual void StateAwakeThing()
+    {
+    }
+
+
+    /// <summary>
     /// 进入的时候调用
     /// </summary>
-    public virtual void StateStart() { }
+    public void StateStart()
+    {
+        isFirst = false;
+        StateStartThing();
+    }
+    protected virtual void StateStartThing()
+    {
+    }
+
 
     /// <summary>
     /// 结束的时候调用
     /// </summary>
-    public virtual void StateEnd() { }
+    public void StateEnd()
+    {
+        StateEndThing();
+    }
+    protected virtual void StateEndThing()
+    {
+    }
+
 
     /// <summary>
-    /// 每桢调用
+    /// 每帧调用
     /// </summary>
-    public virtual void StateUpdate() { }
+    public void StateUpdate()
+    {
+        if (isFirst)
+        {
+            StateStartThing();
+        }
+        StateUpdateThing();
+    }
+
+    protected virtual void StateUpdateThing()
+    {
+    }
 }

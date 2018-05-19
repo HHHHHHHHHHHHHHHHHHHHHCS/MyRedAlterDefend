@@ -13,7 +13,7 @@ public class SceneController
     }
     private Dictionary<SceneState, AbsSceneState> absSceneStateList;
 
-    private AbsSceneState nowState;
+    private AbsSceneState nowState, newState;
     private AsyncOperation asyncOperation;
 
     public SceneController()
@@ -29,47 +29,60 @@ public class SceneController
         absSceneStateList.Add(_stateEnum, _absState);
     }
 
-    public void SetState(SceneState state,bool unLoad=false)
+    /// <summary>
+    /// 设置场景
+    /// </summary>
+    /// <param name="state">场景</param>
+    /// <param name="unLoad">需要执行加载事件</param>
+    public void SetState(SceneState _state, bool unLoad = false, bool waitAysnc = true)
     {
-        if (nowState != null)
-        {
-            nowState.StateEnd();
-        }
-        AbsSceneState newState;
-        absSceneStateList.TryGetValue(state, out newState);
-        nowState = newState;
+        absSceneStateList.TryGetValue(_state, out newState);
+
         if (unLoad)
         {
-            asyncOperation = null;
-            nowState.StateStart();
+            ChanegSceneEvent();
         }
-        else if (nowState != null)
+        else if (newState != null)
         {
-            asyncOperation = SceneManager.LoadSceneAsync(nowState.SceneName);
+            asyncOperation = SceneManager.LoadSceneAsync(newState.SceneName);
+            asyncOperation.allowSceneActivation = false;
         }
+
+        
     }
 
     public void StateUpdate()
     {
-        if (asyncOperation != null)
+        if (asyncOperation != null
+            && asyncOperation.isDone && newState != null)
         {
-            if (asyncOperation.isDone)
-            {
-                if (nowState != null)
-                {
-                    nowState.StateStart();
-                }
-                asyncOperation = null;
-            }
-            else
-            {
-                return;
-            }
+            ChanegSceneEvent();
         }
 
         if (nowState != null)
         {
             nowState.StateUpdate();
         }
+    }
+
+    public void StartLoadedScene()
+    {
+        if (asyncOperation != null)
+        {
+            asyncOperation.allowSceneActivation = true;
+            ChanegSceneEvent();
+        }
+    }
+
+    private void ChanegSceneEvent()
+    {
+        asyncOperation = null;
+        if (nowState != null)
+        {
+            nowState.StateEnd();
+        }
+        newState.StateAwake();
+        nowState = newState;
+        newState = null;
     }
 }

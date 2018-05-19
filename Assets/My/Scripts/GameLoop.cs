@@ -8,15 +8,20 @@ public class GameLoop : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        if(sceneController==null)
+        if (sceneController == null)
         {
+            DontDestroyOnLoad(gameObject);
             sceneController = new SceneController();
-            sceneController.SetState(SceneController.SceneState.BattleScene,true);
+            sceneController.SetState(SceneController.SceneState.StartScene,true);
         }
-
-
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-
+    private void Update()
+    {
+        sceneController.StateUpdate();
+    }
 }
