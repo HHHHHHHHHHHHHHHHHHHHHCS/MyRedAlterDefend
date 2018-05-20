@@ -65,6 +65,7 @@ public abstract class AbsSceneState
         if (isFirst)
         {
             StateStartThing();
+            isFirst = false;
         }
         StateUpdateThing();
     }
