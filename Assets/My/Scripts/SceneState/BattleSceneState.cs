@@ -14,7 +14,7 @@ public class BattleSceneState : AbsSceneState
 
     protected override void StateStartThing()
     {
-        gameFacade = new GameFacade().OnInit();
+        gameFacade = GameFacade.Instance.OnInit();
     }
 
     protected override void StateEndThing()
