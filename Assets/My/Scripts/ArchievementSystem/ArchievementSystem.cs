@@ -3,20 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArchievementSystem : IGameSystem
+public class ArchievementSystem : AbsGameSystem
 {
-    public void OnInit()
-    {
-        throw new NotImplementedException();
-    }
 
-    public void OnRelease()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnUpdate()
-    {
-        throw new NotImplementedException();
-    }
 }
