@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePauseUI : AbsUIBase
+public class GameStateInfoUI : AbsUIBase
 {
 
 }

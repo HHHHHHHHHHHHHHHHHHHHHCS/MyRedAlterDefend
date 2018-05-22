@@ -10,14 +10,22 @@ public class GameFacade
     {
         get
         {
-            if(_instance==null)
+            if (_instance == null)
             {
                 _instance = new GameFacade();
             }
             return _instance;
         }
     }
-    
+
+    public ArchievementSystem ArchievementSystem { get; private set; }
+    public CampSystem CampSystem { get; private set; }
+    public CharacterSystem CharacterSystem { get; private set; }
+    public EnergySystem EnergySystem { get; private set; }
+    public GameEventSystem GameEventSystem { get; private set; }
+    public StageSystem StageSystem { get; private set; }
+    public UISystem UISystem { get; private set; }
+
     /// <summary>
     /// 内部单例化保护
     /// </summary>
@@ -30,16 +38,45 @@ public class GameFacade
 
     public GameFacade OnInit()
     {
+        ArchievementSystem = new ArchievementSystem();
+        CampSystem = new CampSystem();
+        CharacterSystem = new CharacterSystem();
+        EnergySystem = new EnergySystem();
+        GameEventSystem = new GameEventSystem();
+        StageSystem = new StageSystem();
+        UISystem = new UISystem();
+
+
+        ArchievementSystem.OnInit();
+        CampSystem.OnInit();
+        CharacterSystem.OnInit();
+        EnergySystem.OnInit();
+        GameEventSystem.OnInit();
+        StageSystem.OnInit();
+        UISystem.OnInit();
+
         return this;
     }
 
     public void OnRelease()
     {
-        
+        ArchievementSystem.OnRelease();
+        CampSystem.OnRelease();
+        CharacterSystem.OnRelease();
+        EnergySystem.OnRelease();
+        GameEventSystem.OnRelease();
+        StageSystem.OnRelease();
+        UISystem.OnRelease();
     }
 
     public void OnUpdate()
     {
-
+        ArchievementSystem.OnUpdate();
+        CampSystem.OnUpdate();
+        CharacterSystem.OnUpdate();
+        EnergySystem.OnUpdate();
+        GameEventSystem.OnUpdate();
+        StageSystem.OnUpdate();
+        UISystem.OnUpdate();
     }
 }
