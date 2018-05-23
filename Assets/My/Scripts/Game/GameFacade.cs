@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameFacade
+public sealed class GameFacade
 {
     private static GameFacade _instance;
 
