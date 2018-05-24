@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateDesignMode01 : MonoBehaviour
+public class _01Interface : MonoBehaviour
 {
     private void Awake()
     {

@@ -8,7 +8,7 @@ public class UISystem : AbsGameSystem
     public CampUI CampUI { get; private set; }
     public GamePauseUI GamePauseUI { get; private set; }
     public GameStateInfoUI GameStateInfoUI { get; private set; }
-    public SoliderInfoUI SoliderInfoUI { get; private set; }
+    public SoldierInfoUI SoliderInfoUI { get; private set; }
 
 
     public override void OnInit()
@@ -16,7 +16,7 @@ public class UISystem : AbsGameSystem
         CampUI = new CampUI();
         GamePauseUI = new GamePauseUI();
         GameStateInfoUI = new GameStateInfoUI();
-        SoliderInfoUI = new SoliderInfoUI();
+        SoliderInfoUI = new SoldierInfoUI();
 
         CampUI.OnInit();
         GamePauseUI.OnInit();

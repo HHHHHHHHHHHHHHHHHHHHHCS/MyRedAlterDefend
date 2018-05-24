@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAttr : UnitAttrBase
+public class SoldierInfoUI : AbsUIBase
 {
 
 }

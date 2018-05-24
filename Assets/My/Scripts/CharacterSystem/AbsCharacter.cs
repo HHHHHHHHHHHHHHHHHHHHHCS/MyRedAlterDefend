@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class AbsUnit  
+public abstract class AbsCharacter
 {
-    protected UnitAttrBase characterAttr;
+    protected CharacterAttr characterAttr;
 
     protected GameObject gameObject;
     protected NavMeshAgent navMeshAgent;

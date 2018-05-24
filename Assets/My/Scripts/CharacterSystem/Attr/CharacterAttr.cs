@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitAttrBase
+public class CharacterAttr
 {
     public string chararcterName;
     public string headSprite;
