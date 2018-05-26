@@ -11,5 +11,15 @@ public abstract class AbsCharacter
     protected NavMeshAgent navMeshAgent;
     protected AudioSource audioSource;
 
+    protected IWeapon weapon;
 
+
+    public void Attack(Vector3 targetPosition)
+    {
+        if(weapon != null)
+        {
+            weapon.Fire(targetPosition);
+        }
+
+    }
 }

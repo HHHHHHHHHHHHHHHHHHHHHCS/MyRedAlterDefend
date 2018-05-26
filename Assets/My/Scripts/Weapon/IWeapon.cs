@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierCaptain : AbsSoldier
+public interface IWeapon
 {
-
+    void Fire(Vector3 targetPosition);
 }
