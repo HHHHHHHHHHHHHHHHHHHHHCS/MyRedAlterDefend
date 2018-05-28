@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponRifle : IWeapon
+public class WeaponRifle : AbsWeapon
 {
-    public void Fire(Vector3 targetPosition)
+    public override void Fire(Vector3 targetPosition)
     {
         Debug.Log("播放攻击特效 WeaponRifle");
 

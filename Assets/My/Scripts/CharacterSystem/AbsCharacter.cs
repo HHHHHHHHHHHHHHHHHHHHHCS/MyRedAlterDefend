@@ -11,7 +11,7 @@ public abstract class AbsCharacter
     protected NavMeshAgent navMeshAgent;
     protected AudioSource audioSource;
 
-    protected IWeapon weapon;
+    protected AbsWeapon weapon;
 
 
     public void Attack(Vector3 targetPosition)
