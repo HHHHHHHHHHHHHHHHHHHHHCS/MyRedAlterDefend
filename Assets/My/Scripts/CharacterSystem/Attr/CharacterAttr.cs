@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class CharacterAttr
 {
-    public string chararcterName;
-    public string headSprite;
-    public int maxHP;
-    public float moveSpeed;
+    protected string chararcterName;
+    protected string headSprite;
+    protected int maxHP;
+    protected float moveSpeed;
+    protected int lv;
+    protected int critRate;//暴击率0-1  敌人才有的
 
-    public int nowHp;
+    protected IAttrStrategy attrStrategy;
+
+    protected int nowHp;
+
+
+
 }
