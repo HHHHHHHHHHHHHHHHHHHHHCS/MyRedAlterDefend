@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponGun : AbsWeapon
-{ 
-    public override void Fire(Vector3 targetPosition)
+{
+    protected override void PlayBulletEffect(Vector3 targetPosition)
     {
-        Debug.Log("播放攻击特效 WeaponGun");
-
-        Debug.Log("播放攻击声音 WeaponGun");
+        DoPlayBulletEffect(targetPosition, 0.05f);
     }
 
+    protected override void PlaySound()
+    {
+        DoPlaySound("GunShot");
+    }
+
+    protected override void SetDisplayTime()
+    {
+        effectDisplayTime = 0.2f;
+    }
 }

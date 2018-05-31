@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class WeaponRifle : AbsWeapon
 {
-    public override void Fire(Vector3 targetPosition)
+    protected override void PlayBulletEffect(Vector3 targetPosition)
     {
-        Debug.Log("播放攻击特效 WeaponRifle");
+        DoPlayBulletEffect(targetPosition, 0.1f);
+    }
 
-        Debug.Log("播放攻击声音 WeaponRifle");
+    protected override void PlaySound()
+    {
+        DoPlaySound("RifleShot");
+    }
+
+    protected override void SetDisplayTime()
+    {
+        effectDisplayTime = 0.3f;
     }
 }
