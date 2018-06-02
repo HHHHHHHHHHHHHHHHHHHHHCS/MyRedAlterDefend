@@ -10,16 +10,41 @@ public abstract class AbsCharacter
     protected GameObject gameObject;
     protected NavMeshAgent navMeshAgent;
     protected AudioSource audioSource;
+    protected Animation anim;
 
-    protected AbsWeapon weapon;
+    public AbsWeapon Weapon { get; protected set; }
 
-
-    public void Attack(Vector3 targetPosition)
+    public Vector3 Position
     {
-        if(weapon != null)
+        get
         {
-            weapon.Fire(targetPosition);
+            if (!gameObject)
+            {
+                Debug.Log("AbsCharacter GetPosition() gameObject为空");
+                return Vector3.zero;
+            }
+            return gameObject.transform.position;
         }
-
     }
+
+
+    public void Attack(AbsCharacter target)
+    {
+        if (Weapon != null)
+        {
+            Weapon.Fire(target.Position);
+        }
+    }
+
+    public void PlayAnim(string animName)
+    {
+        anim.Play(animName);
+    }
+
+    public void MoveTo(Vector3 pos)
+    {
+        navMeshAgent.SetDestination(pos);
+    }
+
+
 }

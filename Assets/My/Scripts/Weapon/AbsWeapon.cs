@@ -6,7 +6,8 @@ public abstract class AbsWeapon
 {
     protected int atk;
     protected int atkPlusValue;
-    protected float atkRange;
+    public float AtkRange { get; protected set; }
+    public float AtkTime { get; protected set; }
 
     protected float effectDisplayTime = 0;
 
