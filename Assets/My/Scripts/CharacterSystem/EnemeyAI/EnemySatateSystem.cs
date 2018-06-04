@@ -6,7 +6,7 @@ public class EnemySatateSystem
 {
     private List<AbsEnemyState> statesList = new List<AbsEnemyState>();
 
-    public AbsEnemyState CurrentSoldierState { get; private set; }
+    public AbsEnemyState CurrentEnemyState { get; private set; }
 
     public void AddStateRange(params AbsEnemyState[] states)
     {
@@ -32,7 +32,7 @@ public class EnemySatateSystem
         statesList.Add(state);
         if (statesList.Count == 1)
         {
-            CurrentSoldierState = state;
+            CurrentEnemyState = state;
         }
     }
 
@@ -63,7 +63,7 @@ public class EnemySatateSystem
             return;
         }
 
-        EnemyStateID id = CurrentSoldierState.GetIDByTransition(trans);
+        EnemyStateID id = CurrentEnemyState.GetIDByTransition(trans);
         if (id == EnemyStateID.NullState)
         {
             Debug.Log("PerformnTransition 无法执行 NullState ");
@@ -74,9 +74,9 @@ public class EnemySatateSystem
         {
             if (s.StateID == id)
             {
-                CurrentSoldierState.DoBeforeLeaving();
-                CurrentSoldierState = s;
-                CurrentSoldierState.DoBeforeEntering();
+                CurrentEnemyState.DoBeforeLeaving();
+                CurrentEnemyState = s;
+                CurrentEnemyState.DoBeforeEntering();
             }
         }
     }

@@ -5,11 +5,11 @@ using UnityEngine;
 public enum EnemyTransition
 {
     NullTransition = 0,
-    SeeSoldier,
-    Attack,
+    CanAttack,
+    LostSoldier,
 }
 
-public enum EnemyStateID 
+public enum EnemyStateID
 {
     NullState,
     Chase,

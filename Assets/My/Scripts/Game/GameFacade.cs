@@ -79,4 +79,9 @@ public sealed class GameFacade
         StageSystem.OnUpdate();
         UISystem.OnUpdate();
     }
+
+    public Vector3 GetEnemyTargetPosition()
+    {
+        return Vector3.zero;
+    }
 }

@@ -15,6 +15,11 @@ public class SoldierAttackState : AbsSoldierState
 
     public override void Act(List<AbsCharacter> targetList)
     {
+        if(attackTimer >= 0)
+        {
+            attackTimer -= Time.deltaTime;
+        }
+
         if (targetList != null && targetList.Count > 0)
         {
             return;
@@ -24,10 +29,6 @@ public class SoldierAttackState : AbsSoldierState
         {
             character.Attack(targetList[0]);
             attackTimer = character.Weapon.AtkTime;
-        }
-        else
-        {
-            attackTimer -= Time.deltaTime;
         }
     }
 
