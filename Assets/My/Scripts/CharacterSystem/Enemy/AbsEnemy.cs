@@ -10,7 +10,6 @@ public class AbsEnemy : AbsCharacter
     {
         MakeFSM();
     }
-    
 
     protected virtual void MakeFSM()
     {
@@ -23,7 +22,7 @@ public class AbsEnemy : AbsCharacter
     }
 
 
-    public void UpdateFSMAI(List<AbsCharacter> targetList)
+    public override void OnUpdateFSMAI(List<AbsCharacter> targetList)
     {
         fsmSystem.CurrentEnemyState.Reason(targetList);
         fsmSystem.CurrentEnemyState.Act(targetList);

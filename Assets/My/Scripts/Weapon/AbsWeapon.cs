@@ -18,7 +18,7 @@ public abstract class AbsWeapon
     protected Light light;
     protected AudioSource audio;
 
-    private void OnUpdate()
+    public void OnUpdate()
     {
         if(effectDisplayTime>0)
         {

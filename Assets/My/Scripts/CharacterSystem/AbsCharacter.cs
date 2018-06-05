@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public abstract class AbsCharacter
 {
     protected CharacterAttr characterAttr;
@@ -13,6 +14,16 @@ public abstract class AbsCharacter
     protected Animation anim;
 
     public AbsWeapon Weapon { get; protected set; }
+
+    public virtual void OnUpdate()
+    {
+        Weapon.OnUpdate();
+    }
+
+    public virtual void OnUpdateFSMAI(List<AbsCharacter> targetList)
+    {
+
+    }
 
     public Vector3 Position
     {

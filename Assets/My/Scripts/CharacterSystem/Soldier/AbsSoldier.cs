@@ -30,7 +30,7 @@ public class AbsSoldier : AbsCharacter
         fsmSystem.AddStateRange(idle, attack, chase);
     }
 
-    public void UpdateFSMAI(List<AbsCharacter> targetList)
+    public override void OnUpdateFSMAI(List<AbsCharacter> targetList) 
     {
         fsmSystem.CurrentSoldierState.Reason(targetList);
         fsmSystem.CurrentSoldierState.Act(targetList);
