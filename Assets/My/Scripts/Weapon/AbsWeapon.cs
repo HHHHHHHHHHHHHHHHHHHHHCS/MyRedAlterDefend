@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class AbsWeapon
 {
     protected int atk;
-    protected int atkPlusValue;
     public float AtkRange { get; protected set; }
     public float AtkTime { get; protected set; }
 
@@ -18,6 +17,7 @@ public abstract class AbsWeapon
     protected Light light;
     protected AudioSource audio;
 
+
     public void OnUpdate()
     {
         if(effectDisplayTime>0)
@@ -28,6 +28,13 @@ public abstract class AbsWeapon
                 DisableEffect();
             }
         }
+    }
+
+
+    public int AtkDamage(AbsCharacter character )
+    {
+
+        return atk + character.characterAttr.CritValue;
     }
 
     public virtual void Fire(Vector3 targetPosition)

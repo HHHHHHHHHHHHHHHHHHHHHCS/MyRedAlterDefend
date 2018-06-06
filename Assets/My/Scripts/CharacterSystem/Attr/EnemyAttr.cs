@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAttr : CharacterAttr
 {
-
-
+    public EnemyAttr(IAttrStrategy _attrStrategy) : base(_attrStrategy)
+    {
+    }
 }

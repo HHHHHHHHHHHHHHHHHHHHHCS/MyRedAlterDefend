@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class CharacterAttr
 {
-    protected string chararcterName;
-    protected string headSprite;
-    protected int maxHP;
-    protected float moveSpeed;
-    protected int lv;
-    protected int critRate;//暴击率0-1  敌人才有的
+    public string ChararcterName { get; protected set; }
+    public string HeadSprite { get; protected set; }
+    public int MaxHP { get; protected set; }
+    public float MoveSpeed { get; protected set; }
+    public int Lv { get; protected set; }
+    public int CritRate { get; protected set; }//暴击率0-1  敌人才有的
 
     protected IAttrStrategy attrStrategy;
 
-    protected int nowHp;
+    public int NowHp { get; set; }
+    public int DmgDescValue { get; protected set; }
 
+    public CharacterAttr(IAttrStrategy _attrStrategy)
+    {
+        attrStrategy = _attrStrategy;
+        DmgDescValue = attrStrategy.GetDmgDescValue(Lv);
+    }
 
+    public int CritValue
+    {
+        get
+        {
+            return attrStrategy.GetCritDmg(Lv, CritRate);
+        }
+    }
 
 }

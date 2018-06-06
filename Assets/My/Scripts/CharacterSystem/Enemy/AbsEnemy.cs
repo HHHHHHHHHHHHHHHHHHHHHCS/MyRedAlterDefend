@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbsEnemy : AbsCharacter
+public abstract class AbsEnemy : AbsCharacter
 {
     protected EnemySatateSystem fsmSystem;
 
@@ -26,5 +26,18 @@ public class AbsEnemy : AbsCharacter
     {
         fsmSystem.CurrentEnemyState.Reason(targetList);
         fsmSystem.CurrentEnemyState.Act(targetList);
+    }
+
+    public override void Attack(AbsCharacter target)
+    {
+        base.Attack(target);
+        PlayAttackEffect();
+    }
+
+    protected abstract void PlayAttackEffect();
+
+    protected void DoPlayEffect(string effectName)
+    {
+
     }
 }
