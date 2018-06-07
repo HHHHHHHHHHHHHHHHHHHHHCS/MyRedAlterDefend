@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class EnemyTroll : AbsEnemy
 {
-    protected override void PlayAttackEffect()
+    public EnemyTroll() : base()
     {
-        DoPlayEffect("TrollHitEffect");
+        attackEffectName = "TrollHitEffect";
+    }
+
+    public override void Dead()
+    {
+        throw new NotImplementedException();
     }
 }

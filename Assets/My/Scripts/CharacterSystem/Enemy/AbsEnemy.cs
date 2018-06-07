@@ -6,6 +6,8 @@ public abstract class AbsEnemy : AbsCharacter
 {
     protected EnemySatateSystem fsmSystem;
 
+    protected string attackEffectName;
+
     public AbsEnemy()
     {
         MakeFSM();
@@ -31,13 +33,13 @@ public abstract class AbsEnemy : AbsCharacter
     public override void Attack(AbsCharacter target)
     {
         base.Attack(target);
-        PlayAttackEffect();
+        PlayAttackThing();
     }
 
-    protected abstract void PlayAttackEffect();
-
-    protected void DoPlayEffect(string effectName)
+    protected void PlayAttackThing()
     {
-
+        DoPlayEffect(attackEffectName);
     }
+
+
 }

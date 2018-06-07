@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbsSoldier : AbsCharacter
+public abstract class AbsSoldier : AbsCharacter
 {
     protected SoldierSatateSystem fsmSystem;
+
+    protected string deadEffectName;
+    protected string deadSoundName;
 
     protected AbsSoldier() : base()
     {
@@ -35,4 +38,19 @@ public class AbsSoldier : AbsCharacter
         fsmSystem.CurrentSoldierState.Reason(targetList);
         fsmSystem.CurrentSoldierState.Act(targetList);
     }
+
+
+
+    public override void Dead()
+    {
+        PlayDeadThing();
+    }
+
+    protected void PlayDeadThing()
+    {
+        DoPlayEffect(deadEffectName);
+        DoPlaySound(deadSoundName);
+    }
+
+
 }

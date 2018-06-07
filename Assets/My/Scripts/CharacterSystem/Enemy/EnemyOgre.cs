@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class EnemyOgre : AbsEnemy
 {
-    protected override void PlayAttackEffect()
+    public EnemyOgre() : base()
     {
-        DoPlayEffect("OgreHitEffect");
+        attackEffectName = "OgreHitEffect";
+    }
+
+    public override void Dead()
+    {
+        throw new NotImplementedException();
     }
 }

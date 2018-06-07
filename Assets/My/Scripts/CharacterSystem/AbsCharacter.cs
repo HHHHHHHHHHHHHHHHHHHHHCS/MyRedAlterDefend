@@ -65,6 +65,32 @@ public abstract class AbsCharacter
     {
         int endDamage = Mathf.Clamp(damage - characterAttr.DmgDescValue, 1, int.MaxValue);
         characterAttr.NowHp -= endDamage;
+        if(characterAttr.NowHp<=0)
+        {
+            characterAttr.NowHp = 0;
+            Dead();
+        }
         return characterAttr.NowHp;
+    }
+
+    public abstract void Dead();
+
+    protected virtual void DoPlayEffect(string effectName)
+    {
+        if(string.IsNullOrEmpty(effectName))
+        {
+            return;
+        }
+        GameObject effect = null;
+    }
+
+    protected virtual void DoPlaySound(string soundName)
+    {
+        if (string.IsNullOrEmpty(soundName))
+        {
+            return;
+        }
+        AudioClip clip = null;
+        audioSource.PlayOneShot(clip);
     }
 }

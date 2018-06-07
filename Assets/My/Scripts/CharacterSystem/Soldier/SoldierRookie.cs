@@ -5,5 +5,9 @@ using UnityEngine;
 
 public class SoldierRookie : AbsSoldier
 {
-
+    public SoldierRookie() : base()
+    {
+        deadEffectName = "RookieDeadEffect";
+        deadSoundName = "RookieDeath";
+    }
 }

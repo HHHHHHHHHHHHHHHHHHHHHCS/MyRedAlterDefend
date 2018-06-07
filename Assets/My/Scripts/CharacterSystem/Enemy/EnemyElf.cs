@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class EnemyElf : AbsEnemy
 {
-    protected override void PlayAttackEffect()
+    public EnemyElf() : base()
     {
-        DoPlayEffect("ElfHitEffect");
+        attackEffectName = "ElfHitEffect";
+    }
+
+    public override void Dead()
+    {
+        throw new NotImplementedException();
     }
 }
