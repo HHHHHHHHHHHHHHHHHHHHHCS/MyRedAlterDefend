@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType
+{
+    Gun,
+    Rifle,
+    Rocket
+}
+
+
 public abstract class AbsWeapon
 {
     protected int atk;
@@ -20,10 +28,10 @@ public abstract class AbsWeapon
 
     public void OnUpdate()
     {
-        if(effectDisplayTime>0)
+        if (effectDisplayTime > 0)
         {
             effectDisplayTime -= Time.deltaTime;
-            if(effectDisplayTime<=0)
+            if (effectDisplayTime <= 0)
             {
                 DisableEffect();
             }
@@ -31,7 +39,7 @@ public abstract class AbsWeapon
     }
 
 
-    public int AtkDamage(AbsCharacter character )
+    public int AtkDamage(AbsCharacter character)
     {
 
         return atk + character.characterAttr.CritValue;
@@ -59,7 +67,7 @@ public abstract class AbsWeapon
 
     protected abstract void PlayBulletEffect(Vector3 targetPosition);
 
-    protected virtual void DoPlayBulletEffect(Vector3 targetPosition,float width )
+    protected virtual void DoPlayBulletEffect(Vector3 targetPosition, float width)
     {
 
         line.enabled = true;
@@ -70,7 +78,7 @@ public abstract class AbsWeapon
 
     protected abstract void PlaySound();
 
-    protected virtual void DoPlaySound(string audioName )
+    protected virtual void DoPlaySound(string audioName)
     {
         string clipName = audioName;
         AudioClip clip = null;
