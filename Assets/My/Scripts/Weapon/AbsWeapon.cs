@@ -25,6 +25,19 @@ public abstract class AbsWeapon
     protected Light light;
     protected AudioSource audio;
 
+    public AbsWeapon(int _atk, float _atkRange, float _atkTime, GameObject _gameObject)
+    {
+        atk = _atk;
+        AtkRange = _atkRange;
+        prefab = _gameObject;
+        AtkTime = Mathf.Clamp(_atkTime, 0.0000001f, float.MaxValue);
+
+        Transform effct = prefab.transform.Find("Effect");
+        particle = effct.GetComponent<ParticleSystem>();
+        line = effct.GetComponent<LineRenderer>();
+        light = effct.GetComponent<Light>();
+        audio = effct.GetComponent<AudioSource>();
+    }
 
     public void OnUpdate()
     {

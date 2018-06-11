@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RemoteFactory : IAssetFactory
 {
-    public GameObject LoadAudioClip(string _name)
+    public AudioClip LoadAudioClip(string _name)
     {
         throw new NotImplementedException();
     }
@@ -25,7 +25,7 @@ public class RemoteFactory : IAssetFactory
         throw new NotImplementedException();
     }
 
-    public GameObject LoadSprite(string _name)
+    public Sprite LoadSprite(string _name)
     {
         throw new NotImplementedException();
     }
