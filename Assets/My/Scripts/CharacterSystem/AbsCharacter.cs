@@ -15,6 +15,17 @@ public abstract class AbsCharacter
 
     public AbsWeapon Weapon { get; protected set; }
 
+    public void OnInit(GameObject _gameObject, CharacterAttr _characterAttr, AbsWeapon _weapon)
+    {
+        gameObject = _gameObject;
+        characterAttr = _characterAttr;
+        navMeshAgent = _gameObject.GetComponent<NavMeshAgent>();
+        audioSource = _gameObject.GetComponent<AudioSource>();
+        anim = _gameObject.GetComponentInChildren<Animation>();
+        Weapon = _weapon;
+        Weapon.OnInit(this);
+    }
+
     public virtual void OnUpdate()
     {
         Weapon.OnUpdate();
@@ -65,7 +76,7 @@ public abstract class AbsCharacter
     {
         int endDamage = Mathf.Clamp(damage - characterAttr.DmgDescValue, 1, int.MaxValue);
         characterAttr.NowHp -= endDamage;
-        if(characterAttr.NowHp<=0)
+        if (characterAttr.NowHp <= 0)
         {
             characterAttr.NowHp = 0;
             Dead();
@@ -77,7 +88,7 @@ public abstract class AbsCharacter
 
     protected virtual void DoPlayEffect(string effectName)
     {
-        if(string.IsNullOrEmpty(effectName))
+        if (string.IsNullOrEmpty(effectName))
         {
             return;
         }

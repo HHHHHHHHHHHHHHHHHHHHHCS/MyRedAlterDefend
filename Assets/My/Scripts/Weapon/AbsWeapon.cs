@@ -39,6 +39,13 @@ public abstract class AbsWeapon
         audio = effct.GetComponent<AudioSource>();
     }
 
+    public void OnInit(AbsCharacter _charater)
+    {
+        owner = _charater;
+        //set parent
+    }
+
+
     public void OnUpdate()
     {
         if (effectDisplayTime > 0)
@@ -50,7 +57,6 @@ public abstract class AbsWeapon
             }
         }
     }
-
 
     public int AtkDamage(AbsCharacter character)
     {

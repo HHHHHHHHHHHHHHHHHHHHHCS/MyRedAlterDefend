@@ -9,7 +9,7 @@ public static class FactoryManager
     private static ICharacterFactory _enemyFactory;
     private static IWeaponFactory _weaponFactory;
 
-    private static IAssetFactory AssetFactory
+    public static IAssetFactory AssetFactory
     {
         get
         {
@@ -21,7 +21,7 @@ public static class FactoryManager
         }
     }
 
-    private static ICharacterFactory SoldierFactory
+    public static ICharacterFactory SoldierFactory
     {
         get
         {
@@ -33,7 +33,7 @@ public static class FactoryManager
         }
     }
 
-    private static ICharacterFactory EnemyFactory
+    public static ICharacterFactory EnemyFactory
     {
         get
         {
@@ -45,7 +45,7 @@ public static class FactoryManager
         }
     }
 
-    private static IWeaponFactory WeaponFactory
+    public static IWeaponFactory WeaponFactory
     {
         get
         {

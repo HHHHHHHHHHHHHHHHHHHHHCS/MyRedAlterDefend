@@ -8,7 +8,10 @@ public class SoldierFactory : ICharacterFactory
     public AbsCharacter CreateCharacter<T>(WeaponType _weaponType, Vector3 _pos, int _lv = 1) where T : AbsCharacter, new()
     {
         AbsCharacter character = new T();
-
+        var attr = SetCharacterAttr<T>(_lv);
+        var soldierPrefab = FactoryManager.AssetFactory.LoadSoldier(attr.PrefabName);
+        var weapon = FactoryManager.WeaponFactory.CreateWeapon(_weaponType);
+        character.OnInit(soldierPrefab, attr, weapon);
 
 
 
