@@ -42,7 +42,8 @@ public abstract class AbsWeapon
     public void OnInit(AbsCharacter _charater)
     {
         owner = _charater;
-        //set parent
+        GameObject child = UnityTool.FindChild(_charater.CharacterGameObject, "weapon-point");
+        UnityTool.AttachGameObject(child, _charater.CharacterGameObject);
     }
 
 

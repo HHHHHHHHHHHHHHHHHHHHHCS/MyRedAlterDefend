@@ -8,7 +8,7 @@ public abstract class AbsCharacter
 {
     public CharacterAttr characterAttr { get; protected set; }
 
-    protected GameObject gameObject;
+    public GameObject CharacterGameObject { get; protected set; }
     protected NavMeshAgent navMeshAgent;
     protected AudioSource audioSource;
     protected Animation anim;
@@ -17,7 +17,7 @@ public abstract class AbsCharacter
 
     public void OnInit(GameObject _gameObject, CharacterAttr _characterAttr, AbsWeapon _weapon)
     {
-        gameObject = _gameObject;
+        CharacterGameObject = _gameObject;
         characterAttr = _characterAttr;
         navMeshAgent = _gameObject.GetComponent<NavMeshAgent>();
         audioSource = _gameObject.GetComponent<AudioSource>();
@@ -40,12 +40,12 @@ public abstract class AbsCharacter
     {
         get
         {
-            if (!gameObject)
+            if (!CharacterGameObject)
             {
                 Debug.Log("AbsCharacter GetPosition() gameObject为空");
                 return Vector3.zero;
             }
-            return gameObject.transform.position;
+            return CharacterGameObject.transform.position;
         }
     }
 
@@ -60,7 +60,7 @@ public abstract class AbsCharacter
         if (Weapon != null)
         {
             Weapon.Fire(target.Position);
-            gameObject.transform.LookAt(target.gameObject.transform);
+            CharacterGameObject.transform.LookAt(target.CharacterGameObject.transform);
             target.TakeDamage(Weapon.AtkDamage(this));
             PlayAnim("attack");
         }
@@ -92,7 +92,8 @@ public abstract class AbsCharacter
         {
             return;
         }
-        GameObject effect = null;
+        GameObject effect = FactoryManager.AssetFactory.LoadEffect(effectName);
+        effect.AddComponent<AutoDestory>();
     }
 
     protected virtual void DoPlaySound(string soundName)
@@ -101,7 +102,7 @@ public abstract class AbsCharacter
         {
             return;
         }
-        AudioClip clip = null;
+        AudioClip clip = FactoryManager.AssetFactory.LoadAudioClip(soundName);
         audioSource.PlayOneShot(clip);
     }
 }

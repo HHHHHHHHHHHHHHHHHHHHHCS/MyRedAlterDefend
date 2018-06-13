@@ -12,9 +12,6 @@ public class SoldierFactory : ICharacterFactory
         var soldierPrefab = FactoryManager.AssetFactory.LoadSoldier(attr.PrefabName);
         var weapon = FactoryManager.WeaponFactory.CreateWeapon(_weaponType);
         character.OnInit(soldierPrefab, attr, weapon);
-
-
-
         return null;
     }
 
