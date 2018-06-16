@@ -6,24 +6,26 @@ using UnityEngine.AI;
 
 public abstract class AbsCharacter
 {
-    public CharacterAttr characterAttr { get; protected set; }
+    public CharacterAttr CharacterAttr { get; protected set; }
 
     public GameObject CharacterGameObject { get; protected set; }
     protected NavMeshAgent navMeshAgent;
     protected AudioSource audioSource;
     protected Animation anim;
-
     public AbsWeapon Weapon { get; protected set; }
 
-    public void OnInit(GameObject _gameObject, CharacterAttr _characterAttr, AbsWeapon _weapon)
+
+    public AbsCharacter OnInit(GameObject _gameObject, CharacterAttr _characterAttr, AbsWeapon _weapon,Vector3 _pos)
     {
         CharacterGameObject = _gameObject;
-        characterAttr = _characterAttr;
+        CharacterGameObject.transform.position = _pos;
+        CharacterAttr = _characterAttr;
         navMeshAgent = _gameObject.GetComponent<NavMeshAgent>();
         audioSource = _gameObject.GetComponent<AudioSource>();
         anim = _gameObject.GetComponentInChildren<Animation>();
         Weapon = _weapon;
         Weapon.OnInit(this);
+        return this;
     }
 
     public virtual void OnUpdate()
@@ -74,14 +76,14 @@ public abstract class AbsCharacter
 
     public virtual int TakeDamage(int damage)
     {
-        int endDamage = Mathf.Clamp(damage - characterAttr.DmgDescValue, 1, int.MaxValue);
-        characterAttr.NowHp -= endDamage;
-        if (characterAttr.NowHp <= 0)
+        int endDamage = Mathf.Clamp(damage - CharacterAttr.DmgDescValue, 1, int.MaxValue);
+        CharacterAttr.NowHp -= endDamage;
+        if (CharacterAttr.NowHp <= 0)
         {
-            characterAttr.NowHp = 0;
+            CharacterAttr.NowHp = 0;
             Dead();
         }
-        return characterAttr.NowHp;
+        return CharacterAttr.NowHp;
     }
 
     public abstract void Dead();

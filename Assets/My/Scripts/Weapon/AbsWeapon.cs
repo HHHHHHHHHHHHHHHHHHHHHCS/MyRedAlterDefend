@@ -62,7 +62,7 @@ public abstract class AbsWeapon
     public int AtkDamage(AbsCharacter character)
     {
 
-        return atk + character.characterAttr.CritValue;
+        return atk + character.CharacterAttr.CritValue;
     }
 
     public virtual void Fire(Vector3 targetPosition)

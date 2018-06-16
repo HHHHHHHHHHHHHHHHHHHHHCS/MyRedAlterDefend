@@ -3,20 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFactory : ICharacterFactory
+public class EnemyBuilder : AbsCharacterBuilder
 {
-    public AbsCharacter CreateCharacter<T>(WeaponType _weaponType, Vector3 _pos, int _lv = 1) where T : AbsCharacter, new()
+    public EnemyBuilder(AbsCharacter _character, Type _t, WeaponType _weaponType
+    , Vector3 _spawnPosition, int _lv)
+        : base(_character, _t, _weaponType, _spawnPosition, _lv)
     {
-        AbsCharacter character = new T();
+
+    }
+
+    public override CharacterAttr AddCharacterAttr()
+    {
 
         string name = "";
         int maxHP = 0;
         float moveSpeed = 0;
         string iconSprite = "";
         string prefabName = "";
-        Type t = typeof(T);
-
-        if(t==typeof(EnemyElf))
+        if (t == typeof(EnemyElf))
         {
             name = "小精灵";
             maxHP = 100;
@@ -24,7 +28,7 @@ public class EnemyFactory : ICharacterFactory
             iconSprite = "ElfIcon";
             prefabName = "Enemy1";
         }
-        else if(t == typeof(EnemyOgre))
+        else if (t == typeof(EnemyOgre))
         {
             name = "怪物";
             maxHP = 120;
@@ -40,13 +44,17 @@ public class EnemyFactory : ICharacterFactory
             iconSprite = "TrollIcon";
             prefabName = "Enemy3";
         }
-        CharacterAttr attr = new EnemyAttr(new EnemyAttrStrategy(), name, iconSprite, prefabName, maxHP, moveSpeed, _lv);
+        CharacterAttr attr = new EnemyAttr(new EnemyAttrStrategy(), name, iconSprite, prefabName, maxHP, moveSpeed, lv);
+        return attr;
+    }
 
-        GameObject characterGO = FactoryManager.AssetFactory.LoadEnemy(prefabName);
+    public override GameObject AddGameObject()
+    {
+        return FactoryManager.AssetFactory.LoadEnemy(prefabName);
+    }
 
-        AbsWeapon weapon = FactoryManager.WeaponFactory.CreateWeapon(_weaponType);
-
-        character.OnInit(characterGO,attr,weapon, _pos) ;
-        return character;
+    public override AbsWeapon AddWeapon()
+    {
+        return FactoryManager.WeaponFactory.CreateWeapon(weaponType);
     }
 }

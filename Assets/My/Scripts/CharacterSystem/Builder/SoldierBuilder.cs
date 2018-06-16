@@ -3,26 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierFactory : ICharacterFactory
+public class SoldierBuilder : AbsCharacterBuilder
 {
-    public AbsCharacter CreateCharacter<T>(WeaponType _weaponType, Vector3 _pos, int _lv = 1) where T : AbsCharacter, new()
+    public SoldierBuilder(AbsCharacter _character, Type _t, WeaponType _weaponType
+        , Vector3 _spawnPosition, int _lv)
+        : base(_character, _t, _weaponType, _spawnPosition, _lv)
     {
-        AbsCharacter character = new T();
-        AbsCharacterBuilder builder = new SoldierBuilder(character,typeof(T), _weaponType, _pos, _lv);
-        return CharacterBuilderDirector.Construct(builder);
+
     }
 
-
-    public CharacterAttr SetCharacterAttr<T>(int _lv)
+    public override CharacterAttr AddCharacterAttr()
     {
         CharacterAttr attr = null;
 
-        string name = null, headSprite = null, prefabName = null;
-        int maxHP = 0,lv = _lv;
+        string name = null, headSprite = null;
+        int maxHP = 0;
         float moveSpeed = 0;
 
-
-        Type t = typeof(T);
         if (t == typeof(SoldierCaptain))
         {
             name = "上尉士兵";
@@ -56,5 +53,17 @@ public class SoldierFactory : ICharacterFactory
         attr = new SoldierAttr(new SoliderAttrStrategy(), name, headSprite, prefabName
             , maxHP, moveSpeed, lv);
         return attr;
+    }
+
+    public override GameObject AddGameObject()
+    {
+        var _gameObject = FactoryManager.AssetFactory.LoadSoldier(prefabName);
+        return _gameObject;
+    }
+
+    public override AbsWeapon AddWeapon()
+    {
+        var weapon = FactoryManager.WeaponFactory.CreateWeapon(weaponType);
+        return weapon;
     }
 }
