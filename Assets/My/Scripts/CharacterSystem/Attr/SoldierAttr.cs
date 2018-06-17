@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SoldierAttr : CharacterAttr
 {
-    public SoldierAttr(IAttrStrategy _attrStrategy, string _chararcterName, string _headSprite, string _prefabName, int _maxHP, float _moveSpeed, int _lv = 0, float _critRate = 0) : base(_attrStrategy, _chararcterName, _headSprite, _prefabName, _maxHP, _moveSpeed, _lv, _critRate)
+    public SoldierAttr(IAttrStrategy _attrStrategy, CharacterBaseAttr _baseAttr,int _lv)
+        : base(_attrStrategy, _baseAttr, _lv)
     {
     }
 }

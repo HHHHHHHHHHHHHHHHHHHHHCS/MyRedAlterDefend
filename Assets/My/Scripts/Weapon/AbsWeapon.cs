@@ -12,9 +12,10 @@ public enum WeaponType
 
 public abstract class AbsWeapon
 {
-    protected int atk;
-    public float AtkRange { get; protected set; }
-    public float AtkTime { get; protected set; }
+    protected WeaponBaseAttr weaponBaseAttr;
+    protected int Atk { get { return weaponBaseAttr.Atk; } }
+    public float AtkRange { get { return weaponBaseAttr.AtkRange; } }
+    public float AtkTime { get { return weaponBaseAttr.AtkTime; } }
 
     protected float effectDisplayTime = 0;
 
@@ -25,12 +26,9 @@ public abstract class AbsWeapon
     protected Light light;
     protected AudioSource audio;
 
-    public AbsWeapon(int _atk, float _atkRange, float _atkTime, GameObject _gameObject)
+    public AbsWeapon(WeaponBaseAttr _weaponBaseAttr, GameObject _gameObject)
     {
-        atk = _atk;
-        AtkRange = _atkRange;
-        prefab = _gameObject;
-        AtkTime = Mathf.Clamp(_atkTime, 0.0000001f, float.MaxValue);
+        weaponBaseAttr = _weaponBaseAttr;
 
         Transform effct = prefab.transform.Find("Effect");
         particle = effct.GetComponent<ParticleSystem>();
@@ -61,8 +59,7 @@ public abstract class AbsWeapon
 
     public int AtkDamage(AbsCharacter character)
     {
-
-        return atk + character.CharacterAttr.CritValue;
+        return Atk + character.CharacterAttr.CritValue;
     }
 
     public virtual void Fire(Vector3 targetPosition)

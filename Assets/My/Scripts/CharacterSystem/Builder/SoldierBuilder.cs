@@ -14,44 +14,8 @@ public class SoldierBuilder : AbsCharacterBuilder
 
     public override CharacterAttr AddCharacterAttr()
     {
-        CharacterAttr attr = null;
-
-        string name = null, headSprite = null;
-        int maxHP = 0;
-        float moveSpeed = 0;
-
-        if (t == typeof(SoldierCaptain))
-        {
-            name = "上尉士兵";
-            maxHP = 100;
-            moveSpeed = 3.5f;
-            headSprite = "CaptainIcon";
-            prefabName = "Soldier1";
-        }
-        else if (t == typeof(SoldierSergeant))
-        {
-            name = "中士士兵";
-            maxHP = 90;
-            moveSpeed = 3;
-            headSprite = "SergeantIcon";
-            prefabName = "Soldier3";
-        }
-        else if (t == typeof(SoldierRookie))
-        {
-            name = "新手士兵";
-            maxHP = 80;
-            moveSpeed = 2.5f;
-            headSprite = "RookieIcon";
-            prefabName = "Soldier2";
-        }
-        else
-        {
-            Debug.Log("CharacterAttr 类型" + t + "不属于ISoldier，无法创建");
-            return attr;
-        }
-
-        attr = new SoldierAttr(new SoliderAttrStrategy(), name, headSprite, prefabName
-            , maxHP, moveSpeed, lv);
+        CharacterBaseAttr baseAttr = FactoryManager.AttrFactory.GetCharacterBaseAttr(t);
+        SoldierAttr attr = new SoldierAttr(new SoldierAttrStrategy(), baseAttr,lv);
         return attr;
     }
 

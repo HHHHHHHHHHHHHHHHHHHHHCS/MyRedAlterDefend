@@ -11,7 +11,7 @@ public abstract class AbsCharacterBuilder
     protected Type t;
     protected WeaponType weaponType;
     protected int lv;
-    protected string prefabName;
+    protected string prefabName { get {return Character.CharacterAttr.PrefabName; } }
 
     public AbsCharacterBuilder(AbsCharacter _character, Type _t, WeaponType _weaponType
         , Vector3 _spawnPosition, int _lv)

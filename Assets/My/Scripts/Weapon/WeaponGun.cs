@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class WeaponGun : AbsWeapon
 {
-    public WeaponGun(int _atk, float _atkRange, float _atkTime, GameObject _gameObject) : base(_atk, _atkRange, _atkTime, _gameObject)
+    public WeaponGun(WeaponBaseAttr _attr, GameObject _gameObject) : base(_attr, _gameObject)
     {
+
     }
 
     protected override void PlayBulletEffect(Vector3 targetPosition)

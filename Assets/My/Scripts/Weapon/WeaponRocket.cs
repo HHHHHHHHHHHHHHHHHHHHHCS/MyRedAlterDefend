@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponRocket: AbsWeapon
+public class WeaponRocket : AbsWeapon
 {
-    public WeaponRocket(int _atk, float _atkRange, float _atkTime, GameObject _gameObject) : base(_atk, _atkRange, _atkTime, _gameObject)
+    public WeaponRocket(WeaponBaseAttr _attr, GameObject _gameObject) : base(_attr, _gameObject)
     {
     }
 

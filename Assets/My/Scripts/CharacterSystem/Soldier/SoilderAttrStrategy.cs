@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoliderAttrStrategy : IAttrStrategy
+public class SoldierAttrStrategy : IAttrStrategy
 {
     public int GeAddMaxHPValue(int lv)
     {

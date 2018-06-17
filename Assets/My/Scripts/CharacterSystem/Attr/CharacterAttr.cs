@@ -4,41 +4,30 @@ using UnityEngine;
 
 public class CharacterAttr
 {
-    public string ChararcterName { get; protected set; }
-    public string HeadSprite { get; protected set; }
-    public string PrefabName { get; protected set; }
+    public string ChararcterName { get { return baseAttr.ChararcterName; } }
+    public string HeadSprite { get { return baseAttr.HeadSprite; } }
+    public string PrefabName { get { return baseAttr.PrefabName; } }
+    public int MaxHP { get { return baseAttr.MaxHP; } }
+    public float MoveSpeed { get { return baseAttr.MoveSpeed; } }
 
     public int Lv { get; protected set; }
-    public int MaxHP { get; protected set; }
-    public float MoveSpeed { get; protected set; }
     public float CritRate { get; protected set; }//暴击率0-1  敌人才有的
+    public int CritValue { get { return attrStrategy.GetCritDmg(Lv, CritRate); } }
 
     protected IAttrStrategy attrStrategy;
+    protected CharacterBaseAttr baseAttr;
 
     public int NowHp { get; set; }
     public int DmgDescValue { get; protected set; }
 
-    public CharacterAttr(IAttrStrategy _attrStrategy,string _chararcterName, string _headSprite, string _prefabName
-        , int _maxHP,float _moveSpeed, int _lv=1, float _critRate = 0)
+    public CharacterAttr(IAttrStrategy _attrStrategy, CharacterBaseAttr _baseAttr, int _lv =1 ,float _critRate=0)
     {
         attrStrategy = _attrStrategy;
-        DmgDescValue = attrStrategy.GetDmgDescValue(Lv);
-        ChararcterName = _chararcterName;
-        HeadSprite = _headSprite;
-        PrefabName = _prefabName;
+        baseAttr = _baseAttr;
         Lv = _lv;
-        MaxHP = _maxHP;
-        MoveSpeed = _moveSpeed;
         CritRate = _critRate;
-
+        DmgDescValue = attrStrategy.GetDmgDescValue(Lv);
     }
 
-    public int CritValue
-    {
-        get
-        {
-            return attrStrategy.GetCritDmg(Lv, CritRate);
-        }
-    }
 
 }
