@@ -5,38 +5,38 @@ using UnityEngine;
 
 public class UISystem : AbsGameSystem
 {
-    public CampUI CampUI { get; private set; }
+    public CampInfoUI CampInfoUI { get; private set; }
     public GamePauseUI GamePauseUI { get; private set; }
-    public GameStateInfoUI GameStateInfoUI { get; private set; }
+    public GameStateUI GameStateUI { get; private set; }
     public SoldierInfoUI SoliderInfoUI { get; private set; }
 
 
     public override void OnInit()
     {
-        CampUI = new CampUI();
+        CampInfoUI = new CampInfoUI();
         GamePauseUI = new GamePauseUI();
-        GameStateInfoUI = new GameStateInfoUI();
+        GameStateUI = new GameStateUI();
         SoliderInfoUI = new SoldierInfoUI();
 
-        CampUI.OnInit();
+        CampInfoUI.OnInit();
         GamePauseUI.OnInit();
-        GameStateInfoUI.OnInit();
+        GameStateUI.OnInit();
         SoliderInfoUI.OnInit();
     }
 
     public override void OnUpdate()
     {
-        CampUI.OnUpdate();
+        CampInfoUI.OnUpdate();
         GamePauseUI.OnUpdate();
-        GameStateInfoUI.OnUpdate();
+        GameStateUI.OnUpdate();
         SoliderInfoUI.OnUpdate();
     }
 
     public override void OnRelease()
     {
-        CampUI.OnRelease();
+        CampInfoUI.OnRelease();
         GamePauseUI.OnRelease();
-        GameStateInfoUI.OnRelease();
+        GameStateUI.OnRelease();
         SoliderInfoUI.OnRelease();
     }
 }

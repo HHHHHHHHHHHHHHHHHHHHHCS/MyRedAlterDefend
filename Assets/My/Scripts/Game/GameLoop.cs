@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameLoop : MonoBehaviour
 {
+    [SerializeField]
+    private SceneController.SceneState state;
+
     private static SceneController sceneController;
 
     private void Awake()
@@ -12,7 +15,7 @@ public class GameLoop : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             sceneController = new SceneController();
-            sceneController.SetState(SceneController.SceneState.StartScene,true);
+            sceneController.SetState(state, true);
         }
         else
         {

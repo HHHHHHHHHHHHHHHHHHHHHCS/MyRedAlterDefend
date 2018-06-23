@@ -12,7 +12,7 @@ public class BattleSceneState : AbsSceneState
 
     }
 
-    protected override void StateStartThing()
+    protected override void StateAwakeThing()
     {
         gameFacade = GameFacade.Instance.OnInit();
     }
@@ -26,7 +26,7 @@ public class BattleSceneState : AbsSceneState
     {
         if(gameFacade.IsGameOver)
         {//但是正常不应该这样 因为还要存在 结束展示的菜单
-            SceneController.SetState(SceneController.SceneState.MainMenuScene, false, true);
+            //SceneController.SetState(SceneController.SceneState.MainMenuScene, false, true);
         }
         else
         {

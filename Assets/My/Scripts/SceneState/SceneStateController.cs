@@ -45,10 +45,8 @@ public class SceneController
         else if (newState != null)
         {
             asyncOperation = SceneManager.LoadSceneAsync(newState.SceneName);
-            asyncOperation.allowSceneActivation = false;
+            asyncOperation.allowSceneActivation = waitAysnc;
         }
-
-        
     }
 
     public void StateUpdate()
