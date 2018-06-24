@@ -2941,7 +2941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0.00012207031, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &932806333
@@ -5503,7 +5503,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 171252, guid: efe30b54343a2f54aa0df9ba2cf93965, type: 2}
       propertyPath: m_Name
-      value: SoldierCamp_Elf
+      value: SoldierCamp_Captain
       objectReference: {fileID: 0}
     - target: {fileID: 471252, guid: efe30b54343a2f54aa0df9ba2cf93965, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y

@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SoldierType
+{
+    Rookie,
+    Sergeant,
+    Captain,
+}
+
+
 public abstract class AbsSoldier : AbsCharacter
 {
     protected SoldierSatateSystem fsmSystem;
@@ -33,7 +41,7 @@ public abstract class AbsSoldier : AbsCharacter
         fsmSystem.AddStateRange(idle, attack, chase);
     }
 
-    public override void OnUpdateFSMAI(List<AbsCharacter> targetList) 
+    public override void OnUpdateFSMAI(List<AbsCharacter> targetList)
     {
         fsmSystem.CurrentSoldierState.Reason(targetList);
         fsmSystem.CurrentSoldierState.Act(targetList);
