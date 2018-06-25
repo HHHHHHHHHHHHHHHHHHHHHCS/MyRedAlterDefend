@@ -4,23 +4,23 @@ using UnityEngine;
 
 public abstract class AbsCamp
 {
-    protected GameObject gameObject;
-    protected string name;
-    protected string iconSprite;
-    protected SoldierType soldierType;
-    protected Vector3 position;
-    protected float trainTime;
+    public GameObject GameObject;
+    public string Name;
+    public string IconSprite;
+    public SoldierType SoldierType;
+    public Vector3 Position;
+    public float TrainTime;
          
 
     public AbsCamp(GameObject _gameObject, string _name, string _iconSprite
         , SoldierType _soldierType, Vector3 _position, float _trainTime)
     {
-        gameObject = _gameObject; ;
-        name = _name;
-        iconSprite = _iconSprite;
-        soldierType = _soldierType;
-        position = _position;
-        trainTime = _trainTime;
+        GameObject = _gameObject; ;
+        Name = _name;
+        IconSprite = _iconSprite;
+        SoldierType = _soldierType;
+        Position = _position;
+        TrainTime = _trainTime;
     }
 
     public virtual void OnUpdate()

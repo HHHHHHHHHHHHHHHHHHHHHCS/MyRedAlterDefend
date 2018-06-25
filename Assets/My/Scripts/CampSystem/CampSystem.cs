@@ -13,7 +13,7 @@ public class CampSystem : AbsGameSystem
         soldierCamps = new Dictionary<SoldierType, SoldierCamp>();
         InitCamp(SoldierType.Rookie);
         InitCamp(SoldierType.Sergeant);
-        InitCamp(SoldierType.Rookie);
+        InitCamp(SoldierType.Captain);
     }
 
     private void InitCamp(SoldierType soldierType)
@@ -52,6 +52,7 @@ public class CampSystem : AbsGameSystem
         gameObject = GameObject.Find(gameObjectName);
         position = UnityTool.FindChild(gameObject, "TrainPoint").transform.position;
         SoldierCamp camp = new SoldierCamp(gameObject, name, icon, soldierType, position, trainTime);
+        gameObject.AddComponent<CampMono>().OnInit(camp);
         soldierCamps.Add(soldierType, camp);
     }
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameStateUI : AbsUIBase
 {
     private GameObject[] heartArray;
+    private GameObject gameOverBg;
     private Text soldierCountText;
     private Text nowLevelText;
     private Text engryText;
@@ -22,12 +23,13 @@ public class GameStateUI : AbsUIBase
             FindUI(ref heartArray[i], "Hearts/Heart_" + (i +1));
         }
 
-
+        FindUI(ref gameOverBg, "GameOverBg");
         FindUI(ref soldierCountText, "SoldierCountLabel/SoldierCountText");
         FindUI(ref nowLevelText, "NowLevelLabel/NowLevelText");
         FindUI(ref engryText, "EngrySlider/EngryText");
         FindUI(ref pauseButton, "PauseButton");
         FindUI(ref backMenuButton, "GameOverBg/BackMenuButton");
         FindUI(ref engrySlider, "EngrySlider");
+
     }
 }

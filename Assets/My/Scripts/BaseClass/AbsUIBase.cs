@@ -16,4 +16,14 @@ public abstract class AbsUIBase
     {
         UITool.FindUI(ref refObject, PanelRoot, path);
     }
+
+    public virtual void OnShow()
+    {
+        PanelRoot.gameObject.SetActive(true);
+    }
+
+    public virtual void OnHide()
+    {
+        PanelRoot.gameObject.SetActive(false);
+    }
 }

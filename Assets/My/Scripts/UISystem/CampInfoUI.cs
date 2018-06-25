@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CampInfoUI : AbsUIBase
 {
+    private Image campSprite;
     private Text campText;
     private Text campLevelText;
     private Text weaponLevelText;
@@ -18,8 +19,8 @@ public class CampInfoUI : AbsUIBase
     public override void OnInit()
     {
         PanelRoot = UITool.FindUIPanel("CampInfoUI");
-
-        FindUI(ref campText, "CampIcon/CampText");
+        FindUI(ref campSprite, "CampSprite");
+        FindUI(ref campText, "CampSprite/CampText");
         FindUI(ref campLevelText, "CampLevelLabel/CampLevelText");
         FindUI(ref weaponLevelText, "WeaponLevelLabel/WeaponLevelText");
         FindUI(ref aliveUnitText, "AliveUnitLabel/AliveUnitText");
@@ -29,5 +30,13 @@ public class CampInfoUI : AbsUIBase
         FindUI(ref upgradeWeaponButton, "UpgradeWeaponButton");
         FindUI(ref trainButton, "TrainButton");
         FindUI(ref cancelTrainButton, "CancelTrainButton");
+    }
+
+    public void ShowUIInfo(AbsCamp camp)
+    {
+        OnShow();
+        campText.text = camp.Name;
+        //campLevelText.text = camp;
+        campSprite.sprite = FactoryManager.AssetFactory.LoadSprite(camp.IconSprite);
     }
 }
