@@ -14,4 +14,20 @@ public class SoldierCamp : AbsCamp
         nowLv = _lv;
         weaponType = _weaponType;
     }
+
+    public override int LV
+    {
+        get
+        {
+            return nowLv;
+        }
+    }
+
+    public override WeaponType WeaponType
+    {
+        get
+        {
+            return weaponType;
+        }
+    }
 }

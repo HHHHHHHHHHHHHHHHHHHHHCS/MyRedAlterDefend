@@ -32,11 +32,30 @@ public class CampInfoUI : AbsUIBase
         FindUI(ref cancelTrainButton, "CancelTrainButton");
     }
 
-    public void ShowUIInfo(AbsCamp camp)
+    public void ShowUIInfo(AbsCamp _camp)
     {
         OnShow();
-        campText.text = camp.Name;
-        //campLevelText.text = camp;
-        campSprite.sprite = FactoryManager.AssetFactory.LoadSprite(camp.IconSprite);
+        campSprite.sprite = FactoryManager.AssetFactory.LoadSprite(_camp.IconSprite);
+        campText.text = _camp.Name;
+        campLevelText.text = _camp.LV.ToString();
+        ShowWeaponLevel(_camp.WeaponType);
+    }
+
+    public void ShowWeaponLevel(WeaponType _weaponType)
+    {
+        switch (_weaponType)
+        {
+            case WeaponType.Gun:
+                weaponLevelText.text = "短枪";
+                break;
+            case WeaponType.Rifle:
+                weaponLevelText.text = "长枪";
+                break;
+            case WeaponType.Rocket:
+                weaponLevelText.text = "火箭";
+                break;
+            default:
+                break;
+        }
     }
 }

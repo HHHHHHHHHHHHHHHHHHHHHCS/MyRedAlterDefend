@@ -27,4 +27,7 @@ public abstract class AbsCamp
     {
 
     }
+
+    public abstract int LV { get;}
+    public abstract WeaponType WeaponType { get; }
 }
