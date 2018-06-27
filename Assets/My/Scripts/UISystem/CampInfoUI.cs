@@ -16,6 +16,8 @@ public class CampInfoUI : AbsUIBase
     private Button trainButton;
     private Button cancelTrainButton;
 
+    private AbsCamp camp;
+
     public override void OnInit()
     {
         PanelRoot = UITool.FindUIPanel("CampInfoUI");
@@ -30,10 +32,14 @@ public class CampInfoUI : AbsUIBase
         FindUI(ref upgradeWeaponButton, "UpgradeWeaponButton");
         FindUI(ref trainButton, "TrainButton");
         FindUI(ref cancelTrainButton, "CancelTrainButton");
+
+        trainButton.onClick.AddListener(OnClickTrainButton);
+        cancelTrainButton.onClick.AddListener(OnClickCancelTrainButton);
     }
 
     public void ShowUIInfo(AbsCamp _camp)
     {
+        camp = _camp;
         OnShow();
         campSprite.sprite = FactoryManager.AssetFactory.LoadSprite(_camp.IconSprite);
         campText.text = _camp.Name;
@@ -57,5 +63,15 @@ public class CampInfoUI : AbsUIBase
             default:
                 break;
         }
+    }
+
+    private void OnClickTrainButton()
+    {
+        camp.Train();
+    }
+
+    private void OnClickCancelTrainButton()
+    {
+        camp.CancelTrain();
     }
 }
