@@ -19,7 +19,7 @@ public abstract class AbsWeapon
 
     protected float effectDisplayTime = 0;
 
-    protected GameObject prefab;
+    protected GameObject gameObject;
     protected AbsCharacter owner;
     protected ParticleSystem particle;
     protected LineRenderer line;
@@ -29,8 +29,8 @@ public abstract class AbsWeapon
     public AbsWeapon(WeaponBaseAttr _weaponBaseAttr, GameObject _gameObject)
     {
         weaponBaseAttr = _weaponBaseAttr;
-
-        Transform effct = prefab.transform.Find("Effect");
+        gameObject = _gameObject;
+        Transform effct = gameObject.transform.Find("Effect");
         particle = effct.GetComponent<ParticleSystem>();
         line = effct.GetComponent<LineRenderer>();
         light = effct.GetComponent<Light>();
@@ -40,8 +40,8 @@ public abstract class AbsWeapon
     public void OnInit(AbsCharacter _charater)
     {
         owner = _charater;
-        GameObject child = UnityTool.FindChild(_charater.CharacterGameObject, "weapon-point");
-        UnityTool.AttachGameObject(child, _charater.CharacterGameObject);
+        GameObject parent = UnityTool.FindChild(_charater.CharacterGameObject, "weapon-point");
+        UnityTool.AttachGameObject(parent, gameObject);
     }
 
 
@@ -89,7 +89,7 @@ public abstract class AbsWeapon
 
         line.enabled = true;
         line.startWidth = 0.05f; line.endWidth = 0.05f;
-        line.SetPosition(0, prefab.transform.position);
+        line.SetPosition(0, gameObject.transform.position);
         line.SetPosition(1, targetPosition);
     }
 

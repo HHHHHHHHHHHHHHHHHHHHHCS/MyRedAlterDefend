@@ -35,7 +35,7 @@ public class SoldierCamp : AbsCamp
     {
         //要判断能量是否够用
         TrainSoldierCommand cmd = new TrainSoldierCommand(SoldierType, WeaponType,Position,LV);
-        cmdList.Add(cmd);
+        cmdList.AddLast(cmd);
     }
 
 }

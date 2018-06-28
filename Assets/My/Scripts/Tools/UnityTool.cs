@@ -23,6 +23,6 @@ public static class UnityTool
         ts.SetParent(parent.transform);
         ts.localPosition = Vector3.zero;
         ts.localEulerAngles = Vector3.zero;
-        ts.localScale = Vector3.zero;
+        ts.localScale = Vector3.one;
     }
 }

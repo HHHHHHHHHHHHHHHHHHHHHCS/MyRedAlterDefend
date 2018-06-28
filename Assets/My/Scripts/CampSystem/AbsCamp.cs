@@ -11,7 +11,8 @@ public abstract class AbsCamp
     public Vector3 Position;
     public float TrainTime;
 
-    protected List<ITrainCommand> cmdList;
+    protected LinkedList<ITrainCommand> cmdList;
+    protected float trainTimer;
 
     public AbsCamp(GameObject _gameObject, string _name, string _iconSprite
         , SoldierType _soldierType, Vector3 _position, float _trainTime)
@@ -22,23 +23,43 @@ public abstract class AbsCamp
         SoldierType = _soldierType;
         Position = _position;
         TrainTime = _trainTime;
-        cmdList = new List<ITrainCommand>();
+        trainTimer = _trainTime;
+        cmdList = new LinkedList<ITrainCommand>();
     }
 
     public virtual void OnUpdate()
     {
-
+        UpdateCommand();
     }
 
-    public abstract int LV { get;}
+    protected virtual void UpdateCommand()
+    {
+        if (cmdList.Count > 0 && trainTimer > 0)
+        {
+            trainTimer -= Time.deltaTime;
+            if (trainTimer <= 0)
+            {
+                cmdList.First.Value.Execute();
+                cmdList.RemoveFirst();
+            }
+        }
+
+        if ((cmdList.Count > 0 && trainTimer <= 0)
+            || (cmdList.Count <= 0 && trainTimer != TrainTime))
+        {
+            trainTimer = TrainTime;
+        }
+    }
+
+    public abstract int LV { get; }
     public abstract WeaponType WeaponType { get; }
     public abstract void Train();
     public virtual void CancelTrain()
     {
         //能量的回收
-        if(cmdList.Count>0)
+        if (cmdList.Count > 0)
         {
-            cmdList.RemoveAt(cmdList.Count - 1);
+            cmdList.RemoveLast();
         }
     }
 }

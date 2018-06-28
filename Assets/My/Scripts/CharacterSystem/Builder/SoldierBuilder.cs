@@ -16,12 +16,13 @@ public class SoldierBuilder : AbsCharacterBuilder
     {
         CharacterBaseAttr baseAttr = FactoryManager.AttrFactory.GetCharacterBaseAttr(t);
         SoldierAttr attr = new SoldierAttr(new SoldierAttrStrategy(), baseAttr,lv);
+
         return attr;
     }
 
-    public override GameObject AddGameObject()
+    public override GameObject AddGameObject(CharacterAttr attr)
     {
-        var _gameObject = FactoryManager.AssetFactory.LoadSoldier(prefabName);
+        var _gameObject = FactoryManager.AssetFactory.LoadSoldier(attr.PrefabName);
         return _gameObject;
     }
 

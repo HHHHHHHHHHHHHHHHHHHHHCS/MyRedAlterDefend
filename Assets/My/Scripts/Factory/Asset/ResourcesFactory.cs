@@ -50,7 +50,7 @@ public class ResourcesFactory : IAssetFactory
             Debug.Log("InstantiateGameObject 无法加载资源，路径：" + _path);
             return null;
         }
-        return UnityEngine.Object.Instantiate(go);
+        return UnityEngine.GameObject.Instantiate(go);
     }
 
     public T LoadAsset<T>(string _path) where T : UnityEngine.Object
