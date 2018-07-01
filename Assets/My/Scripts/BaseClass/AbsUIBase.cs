@@ -12,18 +12,20 @@ public abstract class AbsUIBase
 
     public virtual void OnRelease() { }
 
-    public void FindUI<T>(ref T refObject,string path) where T : Object
+    public void FindUI<T>(ref T refObject, string path) where T : Object
     {
         UITool.FindUI(ref refObject, PanelRoot, path);
     }
 
     public virtual void OnShow()
     {
-        PanelRoot.gameObject.SetActive(true);
+        if (!PanelRoot.gameObject.activeInHierarchy)
+            PanelRoot.gameObject.SetActive(true);
     }
 
     public virtual void OnHide()
     {
-        PanelRoot.gameObject.SetActive(false);
+        if (PanelRoot.gameObject.activeInHierarchy)
+            PanelRoot.gameObject.SetActive(false);
     }
 }

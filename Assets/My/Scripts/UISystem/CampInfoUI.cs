@@ -35,16 +35,35 @@ public class CampInfoUI : AbsUIBase
 
         trainButton.onClick.AddListener(OnClickTrainButton);
         cancelTrainButton.onClick.AddListener(OnClickCancelTrainButton);
+        OnHide();
     }
 
     public void ShowUIInfo(AbsCamp _camp)
     {
         camp = _camp;
+        AbsCamp.NowCampUI = this;
         OnShow();
         campSprite.sprite = FactoryManager.AssetFactory.LoadSprite(_camp.IconSprite);
         campText.text = _camp.Name;
         campLevelText.text = _camp.LV.ToString();
         ShowWeaponLevel(_camp.WeaponType);
+
+        UpdateInfo();
+    }
+
+    public void UpdateInfo()
+    {
+        trainningText.text = camp.TrainQueueCount.ToString();
+        trainTimeText.text = camp.LastTrainTimer.ToString("f2");
+
+        if (camp.TrainQueueCount == 0 && cancelTrainButton.interactable)
+        {
+            cancelTrainButton.interactable = false;
+        }
+        else if (camp.TrainQueueCount != 0 && !cancelTrainButton.interactable)
+        {
+            cancelTrainButton.interactable = true;
+        }
     }
 
     public void ShowWeaponLevel(WeaponType _weaponType)
