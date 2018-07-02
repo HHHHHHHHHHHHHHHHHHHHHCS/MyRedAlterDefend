@@ -23,6 +23,11 @@ public class EnemyBuilder : AbsCharacterBuilder
         return FactoryManager.AssetFactory.LoadEnemy(attr.PrefabName);
     }
 
+    public override void AddInCharacterSystem()
+    {
+        GameFacade.Instance.CharacterSystem.AddEnemy((AbsEnemy)Character);
+    }
+
     public override AbsWeapon AddWeapon()
     {
         return FactoryManager.WeaponFactory.CreateWeapon(weaponType);

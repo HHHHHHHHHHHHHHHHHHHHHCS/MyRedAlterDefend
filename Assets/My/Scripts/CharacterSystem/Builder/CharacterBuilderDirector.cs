@@ -9,6 +9,7 @@ public static class CharacterBuilderDirector
         var attr = builder.AddCharacterAttr();
         var go = builder.AddGameObject(attr);
         var weapon = builder.AddWeapon();
+        builder.AddInCharacterSystem();
         return builder.Character.OnInit(go, attr, weapon, builder.spawnPosition);
     }
 }

@@ -24,6 +24,7 @@ public abstract class AbsCharacterBuilder
     }
 
     public abstract CharacterAttr AddCharacterAttr();
+    public abstract void AddInCharacterSystem();
     public abstract GameObject AddGameObject(CharacterAttr attr);
     public abstract AbsWeapon AddWeapon();
     public virtual AbsCharacter GetResult()

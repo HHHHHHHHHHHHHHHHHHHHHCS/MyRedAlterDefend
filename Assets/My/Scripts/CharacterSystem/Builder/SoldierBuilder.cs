@@ -15,7 +15,7 @@ public class SoldierBuilder : AbsCharacterBuilder
     public override CharacterAttr AddCharacterAttr()
     {
         CharacterBaseAttr baseAttr = FactoryManager.AttrFactory.GetCharacterBaseAttr(t);
-        SoldierAttr attr = new SoldierAttr(new SoldierAttrStrategy(), baseAttr,lv);
+        SoldierAttr attr = new SoldierAttr(new SoldierAttrStrategy(), baseAttr, lv);
 
         return attr;
     }
@@ -24,6 +24,11 @@ public class SoldierBuilder : AbsCharacterBuilder
     {
         var _gameObject = FactoryManager.AssetFactory.LoadSoldier(attr.PrefabName);
         return _gameObject;
+    }
+
+    public override void AddInCharacterSystem()
+    {
+        GameFacade.Instance.CharacterSystem.AddSoldier((AbsSoldier)Character);
     }
 
     public override AbsWeapon AddWeapon()
