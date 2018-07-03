@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierEnergyCost : IEnergyCountStrategy
+public class SoldierEnergyCostStrategy : IEnergyCostStrategy
 {
     public int GetCampUpgradeCost(SoldierType _type, int _lv)
     {
@@ -57,7 +57,6 @@ public class SoldierEnergyCost : IEnergyCountStrategy
             case WeaponType.Rifle:
                 energy = 60;
                 break;
-
         }
         return energy;
     }

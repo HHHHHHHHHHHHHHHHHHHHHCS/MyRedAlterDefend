@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WeaponType
 {
-    Gun,
+    Gun=0,
     Rifle,
     Rocket
 }

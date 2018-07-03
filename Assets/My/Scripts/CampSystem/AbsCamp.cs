@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class AbsCamp
 {
     public static CampInfoUI NowCampUI;
+    public static readonly int maxWeaponLV;
 
     public GameObject GameObject;
     public string Name;
@@ -16,6 +17,11 @@ public abstract class AbsCamp
 
     protected LinkedList<ITrainCommand> cmdList;
     protected float trainTimer;
+
+    protected IEnergyCostStrategy energyCostStrategy;
+    protected int energyCostCampUpgrade;
+    protected int energyCostWeaponUpgrade;
+    protected int energyCostTrain;
 
 
     public virtual int TrainQueueCount
@@ -33,6 +39,11 @@ public abstract class AbsCamp
         {
             return cmdList.Count == 0 ? 0 : trainTimer;
         }
+    }
+
+    static AbsCamp()
+    {
+        maxWeaponLV = Enum.GetValues(typeof(WeaponType)).Length - 1;
     }
 
     public AbsCamp(GameObject _gameObject, string _name, string _iconSprite
@@ -77,6 +88,15 @@ public abstract class AbsCamp
     public abstract int LV { get; }
     public abstract WeaponType WeaponType { get; }
     public abstract void Train();
+    public abstract void UpgradeCamp();
+    public abstract void UpgradeWeapon();
+    public abstract int EnergyCostCampUpgrade { get; }
+    public abstract int EnergyCostWeaponUpgrade { get; }
+    public abstract int EnergyCostWeaponTrain { get; }
+
+    protected abstract void UpgradeEnergyCostStrategy();
+
+
     public virtual void CancelTrain()
     {
         //能量的回收
