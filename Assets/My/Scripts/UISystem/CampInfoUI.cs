@@ -35,6 +35,8 @@ public class CampInfoUI : AbsUIBase
 
         trainButton.onClick.AddListener(OnClickTrainButton);
         cancelTrainButton.onClick.AddListener(OnClickCancelTrainButton);
+        upgradeCampButton.onClick.AddListener(OnCampUpgradeClick);
+        upgradeWeaponButton.onClick.AddListener(OnWeaponUpgradeClick);
         OnHide();
     }
 
@@ -45,10 +47,15 @@ public class CampInfoUI : AbsUIBase
         OnShow();
         campSprite.sprite = FactoryManager.AssetFactory.LoadSprite(_camp.IconSprite);
         campText.text = _camp.Name;
-        campLevelText.text = _camp.LV.ToString();
-        ShowWeaponLevel(_camp.WeaponType);
 
+        UpgradeCampInfo();
         UpdateInfo();
+    }
+
+    public void UpgradeCampInfo()
+    {
+        campLevelText.text = camp.LV.ToString();
+        ShowWeaponLevel(camp.WeaponType);
     }
 
     public void UpdateInfo()
@@ -92,5 +99,27 @@ public class CampInfoUI : AbsUIBase
     private void OnClickCancelTrainButton()
     {
         camp.CancelTrain();
+    }
+
+    private void OnCampUpgradeClick()
+    {
+        int energy = camp.EnergyCostCampUpgrade;
+        if(energy<0)
+        {
+            return;
+        }
+        camp.UpgradeCamp();
+        UpgradeCampInfo();
+    }
+
+    private void OnWeaponUpgradeClick()
+    {
+        int energy = camp.EnergyCostWeaponUpgrade;
+        if (energy < 0)
+        {
+            return;
+        }
+        camp.UpgradeWeapon();
+        UpgradeCampInfo();
     }
 }

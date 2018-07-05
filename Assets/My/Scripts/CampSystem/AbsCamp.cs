@@ -92,7 +92,7 @@ public abstract class AbsCamp
     public abstract void UpgradeWeapon();
     public abstract int EnergyCostCampUpgrade { get; }
     public abstract int EnergyCostWeaponUpgrade { get; }
-    public abstract int EnergyCostWeaponTrain { get; }
+    public abstract int EnergyCostSoldierTrain { get; }
 
     protected abstract void UpgradeEnergyCostStrategy();
 

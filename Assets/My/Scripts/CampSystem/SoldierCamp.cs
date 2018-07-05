@@ -37,7 +37,7 @@ public class SoldierCamp : AbsCamp
     {
         get
         {
-            if(LV==MaxLv)
+            if (LV == MaxLv)
             {
                 return -1;
             }
@@ -49,7 +49,7 @@ public class SoldierCamp : AbsCamp
     {
         get
         {
-            if((int)weaponType== maxWeaponLV)
+            if ((int)weaponType == maxWeaponLV)
             {
                 return -1;
             }
@@ -58,7 +58,7 @@ public class SoldierCamp : AbsCamp
     }
 
 
-    public override int EnergyCostWeaponTrain
+    public override int EnergyCostSoldierTrain
     {
         get
         {
@@ -77,6 +77,7 @@ public class SoldierCamp : AbsCamp
     public override void UpgradeCamp()
     {
         UpgradeEnergyCostStrategy();
+        nowLv = Mathf.Min(nowLv + 1, MaxLv);
     }
 
     public override void UpgradeWeapon()
