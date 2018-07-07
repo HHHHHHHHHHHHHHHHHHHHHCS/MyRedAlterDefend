@@ -15,6 +15,7 @@ public class SoldierCamp : AbsCamp
         energyCostStrategy = new SoldierEnergyCostStrategy();
         nowLv = _lv;
         weaponType = _weaponType;
+        UpgradeEnergyCostStrategy();
     }
 
     public override int LV
@@ -66,24 +67,70 @@ public class SoldierCamp : AbsCamp
         }
     }
 
-    public override void Train()
+    public override bool Train()
     {
-        UpgradeEnergyCostStrategy();
-        //要判断能量是否够用
-        TrainSoldierCommand cmd = new TrainSoldierCommand(SoldierType, WeaponType, Position, LV);
-        cmdList.AddLast(cmd);
+        int energy = EnergyCostSoldierTrain;
+        if (energy < 0)
+        {
+            GameFacade.Instance.ShowTipMessage("训练错误!");
+            return false;
+        }
+        if (GameFacade.Instance.UseEnergy(energy))
+        {
+            TrainSoldierCommand cmd = new TrainSoldierCommand(SoldierType, WeaponType, Position, LV);
+            cmdList.AddLast(cmd);
+            return true;
+        }
+        else
+        {
+            GameFacade.Instance.ShowTipMessage("训练士兵能量不足,需要能量:" + energy);
+        }
+        return false;
     }
 
-    public override void UpgradeCamp()
+    public override bool UpgradeCamp()
     {
-        UpgradeEnergyCostStrategy();
-        nowLv = Mathf.Min(nowLv + 1, MaxLv);
+        int energy = EnergyCostCampUpgrade;
+        if (energy < 0)
+        {
+            GameFacade.Instance.ShowTipMessage("军营已经满级");
+            return false;
+        }
+        if( GameFacade.Instance.UseEnergy(energy))
+        {
+            nowLv = Mathf.Min(nowLv + 1, MaxLv);
+            UpgradeEnergyCostStrategy();
+            GameFacade.Instance.ShowTipMessage("军营升级成功");
+            return true;
+        }
+        else
+        {
+            GameFacade.Instance.ShowTipMessage("军营升级能量不足,需要能量:" + energy);
+        }
+        return false;
     }
 
-    public override void UpgradeWeapon()
+    public override bool UpgradeWeapon()
     {
-        UpgradeEnergyCostStrategy();
-        weaponType = (WeaponType)Mathf.Clamp((int)weaponType + 1, 0, maxWeaponLV);
+        int energy = EnergyCostWeaponUpgrade;
+
+        if (energy < 0)
+        {
+            GameFacade.Instance.ShowTipMessage("武器已经满级");
+            return false;
+        }
+        if (GameFacade.Instance.UseEnergy(energy))
+        {
+            weaponType = (WeaponType)Mathf.Clamp((int)weaponType + 1, 0, maxWeaponLV);
+            UpgradeEnergyCostStrategy();
+            GameFacade.Instance.ShowTipMessage("武器升级成功");
+            return true;
+        }
+        else
+        {
+            GameFacade.Instance.ShowTipMessage("武器升级能量不足,需要能量:"+ energy);
+        }
+        return false;
     }
 
     protected override void UpgradeEnergyCostStrategy()

@@ -87,9 +87,9 @@ public abstract class AbsCamp
 
     public abstract int LV { get; }
     public abstract WeaponType WeaponType { get; }
-    public abstract void Train();
-    public abstract void UpgradeCamp();
-    public abstract void UpgradeWeapon();
+    public abstract bool Train();
+    public abstract bool UpgradeCamp();
+    public abstract bool UpgradeWeapon();
     public abstract int EnergyCostCampUpgrade { get; }
     public abstract int EnergyCostWeaponUpgrade { get; }
     public abstract int EnergyCostSoldierTrain { get; }
@@ -97,14 +97,15 @@ public abstract class AbsCamp
     protected abstract void UpgradeEnergyCostStrategy();
 
 
-    public virtual void CancelTrain()
+    public virtual bool CancelTrain()
     {
-        //能量的回收
         if (cmdList.Count > 0)
         {
             cmdList.RemoveLast();
-            UpdatgeCampInfo();
+            GameFacade.Instance.RecycleEnergy(EnergyCostSoldierTrain);
+            return true;
         }
+        return false;
     }
 
     public virtual void UpdatgeCampInfo()

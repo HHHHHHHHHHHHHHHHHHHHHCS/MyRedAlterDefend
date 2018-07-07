@@ -38,22 +38,22 @@ public sealed class GameFacade
 
     public GameFacade OnInit()
     {
+        UISystem = new UISystem();
         ArchievementSystem = new ArchievementSystem();
         CampSystem = new CampSystem();
         CharacterSystem = new CharacterSystem();
         EnergySystem = new EnergySystem();
         GameEventSystem = new GameEventSystem();
         StageSystem = new StageSystem();
-        UISystem = new UISystem();
 
 
+        UISystem.OnInit();
         ArchievementSystem.OnInit();
         CampSystem.OnInit();
         CharacterSystem.OnInit();
         EnergySystem.OnInit();
         GameEventSystem.OnInit();
         StageSystem.OnInit();
-        UISystem.OnInit();
 
         return this;
     }

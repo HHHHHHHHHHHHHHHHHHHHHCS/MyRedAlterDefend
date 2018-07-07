@@ -11,6 +11,7 @@ public class CampInfoUI : AbsUIBase
     private Text aliveUnitText;
     private Text trainningText;
     private Text trainTimeText;
+    private Text trainButtonText;
     private Button upgradeCampButton;
     private Button upgradeWeaponButton;
     private Button trainButton;
@@ -28,6 +29,7 @@ public class CampInfoUI : AbsUIBase
         FindUI(ref aliveUnitText, "AliveUnitLabel/AliveUnitText");
         FindUI(ref trainningText, "TrainningLabel/TrainningText");
         FindUI(ref trainTimeText, "TrainTimeLabel/TrainTimeText");
+        FindUI(ref trainButtonText, "TrainButton/TrainButtonLabel/TrainButtonText");
         FindUI(ref upgradeCampButton, "UpgradeCampButton");
         FindUI(ref upgradeWeaponButton, "UpgradeWeaponButton");
         FindUI(ref trainButton, "TrainButton");
@@ -56,6 +58,7 @@ public class CampInfoUI : AbsUIBase
     {
         campLevelText.text = camp.LV.ToString();
         ShowWeaponLevel(camp.WeaponType);
+        trainButtonText.text = camp.EnergyCostSoldierTrain.ToString()   ;
     }
 
     public void UpdateInfo()
@@ -93,33 +96,34 @@ public class CampInfoUI : AbsUIBase
 
     private void OnClickTrainButton()
     {
-        camp.Train();
+        if(camp.Train())
+        {
+            UpdateInfo();
+        }
     }
 
     private void OnClickCancelTrainButton()
     {
-        camp.CancelTrain();
+        if (camp.CancelTrain())
+        {
+            UpdateInfo();
+        }
     }
 
     private void OnCampUpgradeClick()
     {
-        int energy = camp.EnergyCostCampUpgrade;
-        if(energy<0)
+        if(camp.UpgradeCamp())
         {
-            return;
+            UpgradeCampInfo();
         }
-        camp.UpgradeCamp();
-        UpgradeCampInfo();
+
     }
 
     private void OnWeaponUpgradeClick()
     {
-        int energy = camp.EnergyCostWeaponUpgrade;
-        if (energy < 0)
+        if(camp.UpgradeWeapon())
         {
-            return;
+            UpgradeCampInfo();
         }
-        camp.UpgradeWeapon();
-        UpgradeCampInfo();
     }
 }

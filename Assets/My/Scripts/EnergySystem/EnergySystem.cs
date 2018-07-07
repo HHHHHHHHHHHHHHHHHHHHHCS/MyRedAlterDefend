@@ -13,6 +13,7 @@ public class EnergySystem : AbsGameSystem
     public override void OnInit()
     {
         nowEnergy = max_Energy;
+        GameFacade.Instance.UpdateEnergySlider(nowEnergy, max_Energy);
     }
 
     public override void OnUpdate()
@@ -23,6 +24,7 @@ public class EnergySystem : AbsGameSystem
         }
         nowEnergy += recoverSecond * Time.deltaTime;
         nowEnergy = Mathf.Min(nowEnergy, max_Energy);
+        GameFacade.Instance.UpdateEnergySlider(nowEnergy, max_Energy);
     }
 
 
@@ -31,8 +33,15 @@ public class EnergySystem : AbsGameSystem
         if (nowEnergy >= value)
         {
             nowEnergy -= value;
+            GameFacade.Instance.UpdateEnergySlider(nowEnergy, max_Energy);
             return true;
         }
         return false;
+    }
+
+    public void RecycleEnergy(int value)
+    {
+        nowEnergy = Mathf.Clamp(nowEnergy + value, 0, max_Energy);
+        GameFacade.Instance.UpdateEnergySlider(nowEnergy, max_Energy);
     }
 }
