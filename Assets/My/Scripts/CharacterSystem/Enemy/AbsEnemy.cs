@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    Elf,
+    Ogre,
+    Troll
+}
+
 public abstract class AbsEnemy : AbsCharacter
 {
     protected EnemySatateSystem fsmSystem;

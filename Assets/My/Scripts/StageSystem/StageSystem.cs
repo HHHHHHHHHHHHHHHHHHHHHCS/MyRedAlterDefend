@@ -6,4 +6,8 @@ using UnityEngine;
 public class StageSystem : AbsGameSystem
 {
    
+    public int GetCountOfEnemyKilled()
+    {
+        return 0;
+    }
 }
