@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class IStageHandler
 {
     protected int countToFinish;
-    protected int lv;
+    public int lv { get; protected set; }
 
     public IStageHandler(int _lv,int _countToFinish)
     {
