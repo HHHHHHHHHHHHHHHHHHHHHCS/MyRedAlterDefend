@@ -23,8 +23,7 @@ public abstract class IStageHandler
         return false;
     }
 
-    protected virtual void UpdateStage()
-    {
+    public abstract void UpdateStage();
 
-    }
+    public abstract bool CheckIsFinised();
 }

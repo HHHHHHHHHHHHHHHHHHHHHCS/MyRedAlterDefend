@@ -8,11 +8,15 @@ public class StageSystem : AbsGameSystem
     private int nowLv = 1;
     private List<Vector3> spawnPosList;
     private Dictionary<int, IStageHandler> stageHandlerDic;
+    private IStageHandler nowHandler;
 
     public override void OnInit()
     {
         spawnPosList = new List<Vector3>();
+        OnInitSpawnPosList();
         OnInitStageChain();
+
+        nowHandler = GetHandlerByLV(nowLv);
     }
 
     private void OnInitSpawnPosList()
@@ -32,33 +36,23 @@ public class StageSystem : AbsGameSystem
         }
     }
 
-    private Vector3 GetRandomPos()
-    {
-        if (spawnPosList == null || spawnPosList.Count == 0)
-        {
-            Debug.Log("spawnPosList is null or count==0");
-            return Vector3.zero;
-        }
-        return spawnPosList[UnityEngine.Random.Range(0, spawnPosList.Count)];
-    }
+
 
     private void OnInitStageChain()
     {
         stageHandlerDic = new Dictionary<int, IStageHandler>();
 
-        int lv = 1;
+        int lv = 0;
         int count = 3;
-        AddDic(new NormalStageHandler(lv++, EnemyType.Elf, WeaponType.Gun, count * lv, GetRandomPos(), count * lv));
-        AddDic(new NormalStageHandler(lv++, EnemyType.Elf, WeaponType.Rifle, count * lv, GetRandomPos(), count * lv));
-        AddDic(new NormalStageHandler(lv++, EnemyType.Elf, WeaponType.Rocket, count * lv, GetRandomPos(), count * lv));
-        AddDic(new NormalStageHandler(lv++, EnemyType.Ogre, WeaponType.Gun, count * lv, GetRandomPos(), count * lv));
-        AddDic(new NormalStageHandler(lv++, EnemyType.Ogre, WeaponType.Rifle, count * lv, GetRandomPos(), count * lv));
-        AddDic(new NormalStageHandler(lv++, EnemyType.Ogre, WeaponType.Rocket, count * lv, GetRandomPos(), count * lv));
-        AddDic(new NormalStageHandler(lv++, EnemyType.Troll, WeaponType.Gun, count * lv, GetRandomPos(), count * lv));
-        AddDic(new NormalStageHandler(lv++, EnemyType.Troll, WeaponType.Rifle, count * lv, GetRandomPos(), count * lv));
-        AddDic(new NormalStageHandler(lv++, EnemyType.Troll, WeaponType.Rocket, count * lv, GetRandomPos(), count * lv));
-
-
+        AddDic(new NormalStageHandler(++lv, EnemyType.Elf, WeaponType.Gun, count * lv, spawnPosList, count * lv));
+        AddDic(new NormalStageHandler(++lv, EnemyType.Elf, WeaponType.Rifle, count * lv, spawnPosList, count * lv));
+        AddDic(new NormalStageHandler(++lv, EnemyType.Elf, WeaponType.Rocket, count * lv, spawnPosList, count * lv));
+        AddDic(new NormalStageHandler(++lv, EnemyType.Ogre, WeaponType.Gun, count * lv, spawnPosList, count * lv));
+        AddDic(new NormalStageHandler(++lv, EnemyType.Ogre, WeaponType.Rifle, count * lv, spawnPosList, count * lv));
+        AddDic(new NormalStageHandler(++lv, EnemyType.Ogre, WeaponType.Rocket, count * lv, spawnPosList, count * lv));
+        AddDic(new NormalStageHandler(++lv, EnemyType.Troll, WeaponType.Gun, count * lv, spawnPosList, count * lv));
+        AddDic(new NormalStageHandler(++lv, EnemyType.Troll, WeaponType.Rifle, count * lv, spawnPosList, count * lv));
+        AddDic(new NormalStageHandler(++lv, EnemyType.Troll, WeaponType.Rocket, count * lv, spawnPosList, count * lv));
     }
 
     private void AddDic(IStageHandler ish)
@@ -69,6 +63,36 @@ public class StageSystem : AbsGameSystem
     public int GetCountOfEnemyKilled()
     {
         return 0;
+    }
+
+    public override void OnUpdate()
+    {
+        if (nowHandler != null)
+        {
+            if (!nowHandler.CheckIsFinised())
+            {
+                nowHandler.UpdateStage();
+            }
+            else
+            {
+                nowLv++;
+                nowHandler = GetHandlerByLV(nowLv);
+            }
+        }
+    }
+
+    public IStageHandler GetHandlerByLV(int _nowLv)
+    {
+        IStageHandler _nowHandler = null;
+        if (stageHandlerDic.TryGetValue(_nowLv,out _nowHandler))
+        {
+            return _nowHandler;
+        }
+        else
+        {
+            Debug.Log("GetHandlerByLV is null");
+            return null;
+        }
     }
 }
 
