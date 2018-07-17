@@ -66,9 +66,10 @@ public abstract class AbsSoldierState
     public SoldierStateID GetIDByTransition(SoldierTransition trans)
     {
         SoldierStateID id = SoldierStateID.NullState;
+
         if (!map.TryGetValue(trans, out id))
         {
-            Debug.Log("SoldierState Error :" + trans + "不存在,无法查找");
+            Debug.Log("SoldierState StateID:"+ StateID+" Error :" + trans + "不存在,无法查找");
         }
         return id;
     }

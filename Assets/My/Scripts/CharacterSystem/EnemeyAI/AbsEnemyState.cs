@@ -55,7 +55,7 @@ public abstract class AbsEnemyState
     {
         if (!map.ContainsKey(trans))
         {
-            Debug.Log("EnemyState Error :" + trans + "不存在,无法删除");
+            Debug.Log("EnemyState StateID:"+ StateID+" Error :" + trans + "不存在,无法删除");
             return;
         }
         map.Remove(trans);
@@ -66,7 +66,7 @@ public abstract class AbsEnemyState
         EnemyStateID id = EnemyStateID.NullState;
         if (!map.TryGetValue(trans, out id))
         {
-            Debug.Log("EnemyState Error :" + trans + "不存在,无法查找");
+            Debug.Log("EnemyState StateID:"+ StateID + " Error :" + trans + "不存在,无法查找");
         }
         return id;
     }

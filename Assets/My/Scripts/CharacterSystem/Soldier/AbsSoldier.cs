@@ -32,11 +32,11 @@ public abstract class AbsSoldier : AbsCharacter
 
         SoldierAttackState attack = new SoldierAttackState(fsmSystem, this);
         attack.AddTransition(SoldierTransition.NoEnemy, SoldierStateID.Idle);
-        attack.AddTransition(SoldierTransition.CanAttack, SoldierStateID.Attack);
+        attack.AddTransition(SoldierTransition.SeeEnemy, SoldierStateID.Chase);
 
         SoldierChaseState chase = new SoldierChaseState(fsmSystem, this);
         chase.AddTransition(SoldierTransition.NoEnemy, SoldierStateID.Idle);
-        chase.AddTransition(SoldierTransition.SeeEnemy, SoldierStateID.Chase);
+        chase.AddTransition(SoldierTransition.CanAttack, SoldierStateID.Attack);
 
         fsmSystem.AddStateRange(idle, attack, chase);
     }

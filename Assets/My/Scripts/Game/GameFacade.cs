@@ -82,6 +82,6 @@ public sealed class GameFacade
 
     public Vector3 GetEnemyTargetPosition()
     {
-        return Vector3.zero;
+        return new Vector3(40, 0,0);
     }
 }

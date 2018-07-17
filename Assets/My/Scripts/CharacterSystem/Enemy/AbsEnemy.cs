@@ -23,10 +23,13 @@ public abstract class AbsEnemy : AbsCharacter
     protected virtual void MakeFSM()
     {
         fsmSystem = new EnemySatateSystem();
+
         EnemyChaseState chase = new EnemyChaseState(fsmSystem,this);
+        chase.AddTransition(EnemyTransition.CanAttack, EnemyStateID.Attack);
         fsmSystem.AddState(chase);
 
         EnemyAttackState attack = new EnemyAttackState(fsmSystem, this);
+        attack.AddTransition(EnemyTransition.LostSoldier, EnemyStateID.Chase);
         fsmSystem.AddState(attack);
     }
 

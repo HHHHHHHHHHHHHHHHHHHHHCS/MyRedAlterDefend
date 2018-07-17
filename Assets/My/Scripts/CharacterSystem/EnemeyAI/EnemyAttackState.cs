@@ -17,9 +17,10 @@ public class EnemyAttackState : AbsEnemyState
         if (attackTimer >= 0)
         {
             attackTimer -= Time.deltaTime;
+            return;
         }
 
-        if (targetList != null && targetList.Count > 0)
+        if (targetList != null && targetList.Count <= 0)
         {
             return;
         }

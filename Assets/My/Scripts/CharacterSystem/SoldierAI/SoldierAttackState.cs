@@ -18,9 +18,10 @@ public class SoldierAttackState : AbsSoldierState
         if(attackTimer >= 0)
         {
             attackTimer -= Time.deltaTime;
+            return;
         }
 
-        if (targetList != null && targetList.Count > 0)
+        if (targetList != null && targetList.Count <= 0)
         {
             return;
         }
@@ -41,8 +42,12 @@ public class SoldierAttackState : AbsSoldierState
         }
         if (targetList != null && targetList.Count > 0)
         {
-            fsm.PerformnTransition(SoldierTransition.SeeEnemy);
-            return;
+            float distance = Vector3.Distance(targetList[0].Position, character.Position);
+            if (distance > character.Weapon.AtkRange)
+            {
+                fsm.PerformnTransition(SoldierTransition.SeeEnemy);
+                return;
+            }
         }
     }
 

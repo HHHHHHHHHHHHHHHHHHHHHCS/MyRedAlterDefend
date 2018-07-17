@@ -72,7 +72,7 @@ public abstract class AbsWeapon
 
     protected virtual void PlayMuzzleEffect()
     {
-        PlayMuzzleEffect();
+        DoPlayMuzzleEffect();
     }
 
     protected virtual void DoPlayMuzzleEffect()

@@ -12,6 +12,6 @@ public class EnemyElf : AbsEnemy
 
     public override void Dead()
     {
-        throw new NotImplementedException();
+        Debug.Log("I AM DEAD");
     }
 }

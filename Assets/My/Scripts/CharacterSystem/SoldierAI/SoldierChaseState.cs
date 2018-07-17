@@ -29,7 +29,7 @@ public class SoldierChaseState : AbsSoldierState
         float distance = Vector3.Distance(targetList[0].Position, character.Position);
         if(distance<=character.Weapon.AtkRange)
         {
-            fsm.PerformnTransition(SoldierTransition.CanAttack  );
+            fsm.PerformnTransition(SoldierTransition.CanAttack);
         }
     }
 
