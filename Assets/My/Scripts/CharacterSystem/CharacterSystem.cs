@@ -8,18 +8,22 @@ public class CharacterSystem : AbsGameSystem
     private List<AbsCharacter> soldierList;
     private List<AbsCharacter> enemyList;
 
+    private HashSet<AbsCharacter> destoryCharacterSet;
 
     public override void OnInit()
     {
         soldierList = new List<AbsCharacter>();
         enemyList = new List<AbsCharacter>();
-
+        destoryCharacterSet = new HashSet<AbsCharacter>();
     }
 
     public override void OnUpdate()
     {
         OnUpdateSoldier();
         OnUpdateEnemy();
+
+        RemoveDeadList(soldierList);
+        RemoveDeadList(enemyList);
     }
 
     private void OnUpdateSoldier()
@@ -58,5 +62,29 @@ public class CharacterSystem : AbsGameSystem
     public void RemoveAddSoldier(AbsSoldier _soldier)
     {
         soldierList.Remove(_soldier);
+    }
+
+    public void RemoveDeadList(List<AbsCharacter> list)
+    {
+        for(int i=list.Count-1;i>=0;i--)
+        {
+            var item = list[i];
+            if(item.IsKilled)
+            {
+                destoryCharacterSet.Add(item);
+                list.Remove(item);
+            }
+        }
+
+
+        foreach(var item in destoryCharacterSet)
+        {
+            item.OnUpdate();
+            if (item.CanDesotry)
+            {
+                item.OnRelease();
+            }
+        }
+        destoryCharacterSet.RemoveWhere(x => x.CanDesotry);
     }
 }

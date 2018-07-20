@@ -24,7 +24,7 @@ public abstract class AbsEnemy : AbsCharacter
     {
         fsmSystem = new EnemySatateSystem();
 
-        EnemyChaseState chase = new EnemyChaseState(fsmSystem,this);
+        EnemyChaseState chase = new EnemyChaseState(fsmSystem, this);
         chase.AddTransition(EnemyTransition.CanAttack, EnemyStateID.Attack);
         fsmSystem.AddState(chase);
 
@@ -36,6 +36,10 @@ public abstract class AbsEnemy : AbsCharacter
 
     public override void OnUpdateFSMAI(List<AbsCharacter> targetList)
     {
+        if (IsKilled)
+        {
+            return;
+        }
         fsmSystem.CurrentEnemyState.Reason(targetList);
         fsmSystem.CurrentEnemyState.Act(targetList);
     }
@@ -52,4 +56,10 @@ public abstract class AbsEnemy : AbsCharacter
     }
 
 
+    public override void OnKilled()
+    {
+        base.OnKilled();
+
+
+    }
 }

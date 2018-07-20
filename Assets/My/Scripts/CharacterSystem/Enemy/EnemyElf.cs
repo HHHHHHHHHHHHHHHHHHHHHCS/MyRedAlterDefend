@@ -10,8 +10,4 @@ public class EnemyElf : AbsEnemy
         attackEffectName = "ElfHitEffect";
     }
 
-    public override void Dead()
-    {
-        Debug.Log("I AM DEAD");
-    }
 }

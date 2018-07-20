@@ -43,14 +43,19 @@ public abstract class AbsSoldier : AbsCharacter
 
     public override void OnUpdateFSMAI(List<AbsCharacter> targetList)
     {
+        if (IsKilled)
+        {
+            return;
+        }
         fsmSystem.CurrentSoldierState.Reason(targetList);
         fsmSystem.CurrentSoldierState.Act(targetList);
     }
 
 
 
-    public override void Dead()
+    public override void OnKilled()
     {
+        base.OnKilled();
         PlayDeadThing();
     }
 

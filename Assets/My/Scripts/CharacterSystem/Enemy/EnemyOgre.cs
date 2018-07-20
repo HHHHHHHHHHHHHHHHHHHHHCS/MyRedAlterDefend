@@ -10,8 +10,5 @@ public class EnemyOgre : AbsEnemy
         attackEffectName = "OgreHitEffect";
     }
 
-    public override void Dead()
-    {
-        throw new NotImplementedException();
-    }
+
 }

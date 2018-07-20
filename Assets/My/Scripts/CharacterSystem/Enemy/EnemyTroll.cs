@@ -10,8 +10,5 @@ public class EnemyTroll : AbsEnemy
         attackEffectName = "TrollHitEffect";
     }
 
-    public override void Dead()
-    {
-        throw new NotImplementedException();
-    }
+
 }
