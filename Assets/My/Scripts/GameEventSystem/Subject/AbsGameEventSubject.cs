@@ -14,12 +14,12 @@ public abstract class AbsGameEventSubject
     public void RegisterObserver(AbsGameEventObserver server)
     {
         observers.Add(server);
-        server.Subject=this;
+        server.SetSubject(this);
     }
 
     public void RemoveObserver(AbsGameEventObserver server)
     {
-        server.Subject = null;
+        server.SetSubject(null);
         observers.Remove(server);
     }
 

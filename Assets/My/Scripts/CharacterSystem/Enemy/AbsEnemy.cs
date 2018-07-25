@@ -59,7 +59,6 @@ public abstract class AbsEnemy : AbsCharacter
     public override void OnKilled()
     {
         base.OnKilled();
-
-
+        GameFacade.Instance.StageSystem.AddEnemyKilled();
     }
 }

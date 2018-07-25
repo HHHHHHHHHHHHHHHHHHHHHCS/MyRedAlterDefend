@@ -9,6 +9,7 @@ public class StageSystem : AbsGameSystem
     private List<Vector3> spawnPosList;
     private Dictionary<int, IStageHandler> stageHandlerDic;
     private IStageHandler nowHandler;
+    private int killedCount;
 
     public override void OnInit()
     {
@@ -17,6 +18,8 @@ public class StageSystem : AbsGameSystem
         OnInitStageChain();
 
         nowHandler = GetHandlerByLV(nowLv);
+        GameFacade.Instance.RegisterObserver(GameEventType.EnemyKilled
+            , new EnemyyKilledObserverStageSystem(this));
     }
 
     private void OnInitSpawnPosList()
@@ -35,8 +38,6 @@ public class StageSystem : AbsGameSystem
             }
         }
     }
-
-
 
     private void OnInitStageChain()
     {
@@ -60,9 +61,15 @@ public class StageSystem : AbsGameSystem
         stageHandlerDic.Add(ish.lv, ish);
     }
 
+    public void AddEnemyKilled()
+    {
+        killedCount++;
+        GameFacade.Instance.TriggerEvent(GameEventType.EnemyKilled);
+    }
+
     public int GetCountOfEnemyKilled()
     {
-        return 0;
+        return killedCount;
     }
 
     public override void OnUpdate()

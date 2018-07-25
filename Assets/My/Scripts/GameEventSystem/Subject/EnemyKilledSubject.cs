@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class EnemyKilledSubject : AbsGameEventSubject
 {
-    private int killedCount = 0;
-
-    public int KilledCount { get { return killedCount; } }
+    public int KilledCount { get; set; }
 
     public override void TriggerEvent()
     {
-        killedCount++;
         NotifyObserver();
     }
 }

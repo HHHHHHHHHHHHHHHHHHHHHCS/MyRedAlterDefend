@@ -5,11 +5,8 @@ using UnityEngine;
 
 public abstract class AbsGameEventObserver
 {
-    public AbsGameEventSubject Subject { get; set; }
 
+    public abstract void OnReceiveNotify();
 
-    public void OnReceiveNotify()
-    {
-
-    }
+    public abstract void SetSubject(AbsGameEventSubject _subject);
 }

@@ -19,14 +19,11 @@ public class GameEventSystem : AbsGameSystem
     public override void OnInit()
     {
         gameEvents = new Dictionary<GameEventType, AbsGameEventSubject>();
-
     }
 
     private void InitGameEvents()
     {
-        gameEvents.Add(GameEventType.EnemyKilled, new EnemyKilledSubject());
-        gameEvents.Add(GameEventType.SoldierKilled, new SoldierKilledSubject());
-        gameEvents.Add(GameEventType.NewStage, new NewStageSubject());
+
     }
 
     public void RegisterObserver(GameEventType _type,params AbsGameEventObserver[] _server)
@@ -54,10 +51,32 @@ public class GameEventSystem : AbsGameSystem
         GetGameEvents(_type).TriggerEvent();
     }
 
+
+        
     private AbsGameEventSubject GetGameEvents(GameEventType _type)
     {
         AbsGameEventSubject subject = null;
         if (!gameEvents.TryGetValue(_type,out subject))
+        {
+            switch (_type)
+            {
+                case GameEventType.Null:
+                    break;
+                case GameEventType.EnemyKilled:
+                    subject = new EnemyKilledSubject();
+                    gameEvents.Add(GameEventType.EnemyKilled, subject);
+                    break;
+                case GameEventType.SoldierKilled:
+                    subject = new SoldierKilledSubject();
+                        gameEvents.Add(GameEventType.SoldierKilled, subject);
+                    break;
+                case GameEventType.NewStage:
+                    subject = new NewStageSubject();
+                    gameEvents.Add(GameEventType.NewStage, subject);
+                    break;
+            }
+        }
+        if (subject == null)
         {
             Debug.Log("gameEvents not have key:" + gameEvents);
         }
