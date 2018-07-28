@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class NewStageSubject : AbsGameEventSubject
 {
-    private int stageCount = 1;
-
-    public int StageCount { get { return stageCount; } }
+    public int StageCount { get { return GameFacade.Instance.StageSystem.NowLv; } }
 
     public override void TriggerEvent()
     {
-        stageCount++;
         NotifyObserver();
     }
 

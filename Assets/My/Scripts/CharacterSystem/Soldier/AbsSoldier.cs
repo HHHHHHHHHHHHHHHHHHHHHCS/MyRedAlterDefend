@@ -57,6 +57,7 @@ public abstract class AbsSoldier : AbsCharacter
     {
         base.OnKilled();
         PlayDeadThing();
+        GameFacade.Instance.TriggerEvent(GameEventType.SoldierKilled);
     }
 
     protected void PlayDeadThing()

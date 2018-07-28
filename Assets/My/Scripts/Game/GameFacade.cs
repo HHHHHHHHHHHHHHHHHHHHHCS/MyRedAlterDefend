@@ -48,12 +48,12 @@ public sealed class GameFacade
 
 
         UISystem.OnInit();
-        ArchievementSystem.OnInit();
         CampSystem.OnInit();
         CharacterSystem.OnInit();
         EnergySystem.OnInit();
         GameEventSystem.OnInit();
         StageSystem.OnInit();
+        ArchievementSystem.OnInit();
 
         return this;
     }

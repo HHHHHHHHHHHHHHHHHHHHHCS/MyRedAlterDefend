@@ -97,6 +97,10 @@ public abstract class AbsCharacter
 
     public virtual int TakeDamage(int damage)
     {
+        if(IsKilled)
+        {
+            return 0;
+        }
         int endDamage = Mathf.Clamp(damage - CharacterAttr.DmgDescValue, 1, int.MaxValue);
         CharacterAttr.NowHp -= endDamage;
         if (CharacterAttr.NowHp <= 0)
