@@ -41,4 +41,21 @@ public class ArchievementSystem : AbsGameSystem
         }
 
     }
+
+    public void SaveData()
+    {
+        Dictionary<PlayerAttribute, int> newDic = new Dictionary<PlayerAttribute, int>();
+        newDic.Add(PlayerAttribute.EnemyKilledCount, enemyKilledCount);
+        newDic.Add(PlayerAttribute.SoldierKilledCount, soldierKilledCount);
+        newDic.Add(PlayerAttribute.MaxStage, maxStageLv);
+        JsonManager.Instance.UpdateData(newDic);
+    }
+
+    public void LoadData()
+    {
+        var cacheDic = JsonManager.Instance.ReadData();
+        enemyKilledCount = cacheDic[PlayerAttribute.EnemyKilledCount];
+        soldierKilledCount = cacheDic[PlayerAttribute.SoldierKilledCount];
+        maxStageLv = cacheDic[PlayerAttribute.MaxStage];
+    }
 }
