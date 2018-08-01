@@ -55,11 +55,15 @@ public sealed class GameFacade
         StageSystem.OnInit();
         ArchievementSystem.OnInit();
 
+        this.LoadMemento();
+
         return this;
     }
 
     public void OnRelease()
     {
+        this.CreateMemento();
+
         ArchievementSystem.OnRelease();
         CampSystem.OnRelease();
         CharacterSystem.OnRelease();

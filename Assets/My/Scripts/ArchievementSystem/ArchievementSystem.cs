@@ -42,20 +42,19 @@ public class ArchievementSystem : AbsGameSystem
 
     }
 
-    public void SaveData()
+    public ArchievementMemento CreateMemento()
     {
-        Dictionary<PlayerAttribute, int> newDic = new Dictionary<PlayerAttribute, int>();
-        newDic.Add(PlayerAttribute.EnemyKilledCount, enemyKilledCount);
-        newDic.Add(PlayerAttribute.SoldierKilledCount, soldierKilledCount);
-        newDic.Add(PlayerAttribute.MaxStage, maxStageLv);
-        JsonManager.Instance.UpdateData(newDic);
+        ArchievementMemento archievementMemento = new ArchievementMemento();
+        archievementMemento.EnemyKilledCount = enemyKilledCount;
+        archievementMemento.SoldierKilledCount = soldierKilledCount;
+        archievementMemento.MaxStageLv = maxStageLv;
+        return archievementMemento;
     }
 
-    public void LoadData()
+    public void SetMemento(ArchievementMemento memento)
     {
-        var cacheDic = JsonManager.Instance.ReadData();
-        enemyKilledCount = cacheDic[PlayerAttribute.EnemyKilledCount];
-        soldierKilledCount = cacheDic[PlayerAttribute.SoldierKilledCount];
-        maxStageLv = cacheDic[PlayerAttribute.MaxStage];
+        enemyKilledCount = memento.EnemyKilledCount;
+        soldierKilledCount = memento.SoldierKilledCount;
+        maxStageLv = memento.MaxStageLv;
     }
 }
