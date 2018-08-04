@@ -44,6 +44,11 @@ public abstract class AbsEnemy : AbsCharacter
         fsmSystem.CurrentEnemyState.Act(targetList);
     }
 
+    public override void RunVisitor(ICharacterVisiator visitor)
+    {
+        visitor.VisitorEnemy(this);
+    }
+
     public override void Attack(AbsCharacter target)
     {
         base.Attack(target);

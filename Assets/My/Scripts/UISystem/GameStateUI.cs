@@ -9,6 +9,7 @@ public class GameStateUI : AbsUIBase
     private GameObject[] heartArray;
     private GameObject gameOverBg;
     private Text soldierCountText;
+    private Text enemyCountText;
     private Text nowLevelText;
     private Text eneryText;
     private Text tipText;
@@ -17,6 +18,7 @@ public class GameStateUI : AbsUIBase
     private Slider enerySlider;
 
     private float showMsgTimer = 0;
+    private AliveCountVisiator aliveCountVisiator;
 
     public override void OnInit()
     {
@@ -30,6 +32,7 @@ public class GameStateUI : AbsUIBase
 
         FindUI(ref gameOverBg, "GameOverBg");
         FindUI(ref soldierCountText, "SoldierCountLabel/SoldierCountText");
+        FindUI(ref enemyCountText, "EnemyCountLabel/EnemyCountCount");
         FindUI(ref nowLevelText, "NowLevelLabel/NowLevelText");
         FindUI(ref eneryText, "EnerySlider/EneryText");
         FindUI(ref pauseButton, "PauseButton");
@@ -37,6 +40,7 @@ public class GameStateUI : AbsUIBase
         FindUI(ref enerySlider, "EnerySlider");
         FindUI(ref tipText, "TipText");
 
+        aliveCountVisiator = new AliveCountVisiator();
     }
 
     public override void OnUpdate()
@@ -62,5 +66,17 @@ public class GameStateUI : AbsUIBase
     {
         enerySlider.value = _nowEnergy / _maxEnergy;
         eneryText.text = string.Format("{0}/{1}", (int)_nowEnergy, (int)_maxEnergy);
+    }
+
+    public void UpdateAliveCount()
+    {
+        GameFacade.Instance.RunCharacterVisiator(aliveCountVisiator);
+        soldierCountText.text = aliveCountVisiator.SoliderCount.ToString();
+        enemyCountText.text = aliveCountVisiator.EnemyCount.ToString();
+    }
+
+    public void UpdateNowStage(int nowLv)
+    {
+        nowLevelText.text = nowLv.ToString();
     }
 }

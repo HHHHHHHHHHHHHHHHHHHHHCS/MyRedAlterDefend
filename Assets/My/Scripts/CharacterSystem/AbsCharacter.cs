@@ -65,18 +65,17 @@ public abstract class AbsCharacter
 
     }
 
+    public abstract void RunVisitor(ICharacterVisiator visitor);
+
     public virtual void OnUpdateFSMAI(List<AbsCharacter> targetList)
     {
 
     }
 
-
-
     public void PlayAnim(string animName)
     {
         anim.Play(animName);
     }
-
 
     public virtual void Attack(AbsCharacter target)
     {

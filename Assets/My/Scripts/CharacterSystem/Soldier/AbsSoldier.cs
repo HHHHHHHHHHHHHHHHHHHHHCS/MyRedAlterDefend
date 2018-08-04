@@ -41,6 +41,11 @@ public abstract class AbsSoldier : AbsCharacter
         fsmSystem.AddStateRange(idle, attack, chase);
     }
 
+    public override void RunVisitor(ICharacterVisiator visitor)
+    {
+        visitor.VisitorSoldier(this);
+    }
+
     public override void OnUpdateFSMAI(List<AbsCharacter> targetList)
     {
         if (IsKilled)

@@ -13,4 +13,14 @@ public static class E_UISystem
     {
         facade.UISystem.GameStateUI.UpdateEnergySlider(_nowEnergy, _maxEnergy);
     }
+
+    public static void UpdateAliveCount(this GameFacade facade)
+    {
+        facade.UISystem.GameStateUI.UpdateAliveCount();
+    }
+
+    public static void UpdateNowStage(this GameFacade facade,int nowLv)
+    {
+        facade.UISystem.GameStateUI.UpdateNowStage(nowLv);
+    }
 }

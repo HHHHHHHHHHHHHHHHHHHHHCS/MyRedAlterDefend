@@ -23,13 +23,11 @@ public class ArchievementSystem : AbsGameSystem
     public void AddEnemyKilledCount(int number=1)
     {
         enemyKilledCount += number;
-        Debug.Log("AddEnemyKilledCount :" + enemyKilledCount);
     }
 
     public void AddSoldierKilledCount(int number = 1)
     {
         soldierKilledCount += number;
-        Debug.Log("AddSoldierKilledCount :" + soldierKilledCount);
     }
 
     public void SetMaxStageLv(int lv = 1)

@@ -47,21 +47,25 @@ public class CharacterSystem : AbsGameSystem
     public void AddEnemy(AbsEnemy _enemy)
     {
         enemyList.Add(_enemy);
+        GameFacade.Instance.UpdateAliveCount();
     }
 
     public void RemoveEnemy(AbsEnemy _enemy)
     {
         enemyList.Remove(_enemy);
+        GameFacade.Instance.UpdateAliveCount();
     }
 
     public void AddSoldier(AbsSoldier _soldier)
     {
         soldierList.Add(_soldier);
+        GameFacade.Instance.UpdateAliveCount();
     }
 
     public void RemoveAddSoldier(AbsSoldier _soldier)
     {
         soldierList.Remove(_soldier);
+        GameFacade.Instance.UpdateAliveCount();
     }
 
     public void RemoveDeadList(List<AbsCharacter> list)
@@ -86,5 +90,18 @@ public class CharacterSystem : AbsGameSystem
             }
         }
         destoryCharacterSet.RemoveWhere(x => x.CanDesotry);
+    }
+
+    public void RunVisitor(ICharacterVisiator characterVisiator)
+    {
+        characterVisiator.OnInit();
+        foreach (var item in soldierList)
+        {
+            item.RunVisitor(characterVisiator);
+        }
+        foreach (var item in enemyList)
+        {
+            item.RunVisitor(characterVisiator);
+        }
     }
 }

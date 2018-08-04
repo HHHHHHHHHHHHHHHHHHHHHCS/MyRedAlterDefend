@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StageSystem : AbsGameSystem
 {
-    private int nowLv = 1;
+    private int nowLv ;
     private List<Vector3> spawnPosList;
     private Dictionary<int, IStageHandler> stageHandlerDic;
     private IStageHandler nowHandler;
@@ -21,6 +21,7 @@ public class StageSystem : AbsGameSystem
         private set
         {
             nowLv = value;
+            GameFacade.Instance.UpdateNowStage(value);
         }
     }
 
@@ -30,6 +31,7 @@ public class StageSystem : AbsGameSystem
         OnInitSpawnPosList();
         OnInitStageChain();
 
+        NowLv = 1;
         nowHandler = GetHandlerByLV(NowLv);
         GameFacade.Instance.RegisterObserver(GameEventType.EnemyKilled
             , new EnemyyKilledObserverStageSystem(this));
