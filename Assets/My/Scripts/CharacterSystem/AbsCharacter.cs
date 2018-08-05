@@ -115,7 +115,7 @@ public abstract class AbsCharacter
         OnKilled();
     }
 
-    protected virtual void DoPlayEffect(string effectName)
+    public virtual void DoPlayEffect(string effectName)
     {
         if (string.IsNullOrEmpty(effectName))
         {
@@ -125,7 +125,7 @@ public abstract class AbsCharacter
         effect.AddComponent<AutoDestory>();
     }
 
-    protected virtual void DoPlaySound(string soundName)
+    public virtual void DoPlaySound(string soundName)
     {
         if (string.IsNullOrEmpty(soundName))
         {
