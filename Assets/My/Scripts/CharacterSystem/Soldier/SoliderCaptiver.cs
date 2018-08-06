@@ -10,9 +10,7 @@ public class SoliderCaptiver : AbsSoldier
     {
         enemy = _enemy;
         CharacterAttr attr = new CharacterAttr(enemy.CharacterAttr.AttrStrategy,enemy.CharacterAttr.BaseAttr, 1);
-        CharacterAttr = attr;
-        CharacterGameObject = enemy.CharacterGameObject;
-        Weapon = enemy.Weapon;
+        OnInit(enemy.CharacterGameObject, attr, enemy.Weapon, enemy.Position);
     }
 
     public override void DoPlayEffect(string effectName)

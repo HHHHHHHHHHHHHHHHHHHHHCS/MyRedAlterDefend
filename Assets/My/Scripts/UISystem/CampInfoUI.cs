@@ -52,6 +52,17 @@ public class CampInfoUI : AbsUIBase
 
         UpgradeCampInfo();
         UpdateInfo();
+
+        if(camp is CaptiveCamp)
+        {
+            upgradeCampButton.gameObject.SetActive(false);
+            upgradeWeaponButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            upgradeCampButton.gameObject.SetActive(true);
+            upgradeWeaponButton.gameObject.SetActive(true);
+        }
     }
 
     public void UpgradeCampInfo()

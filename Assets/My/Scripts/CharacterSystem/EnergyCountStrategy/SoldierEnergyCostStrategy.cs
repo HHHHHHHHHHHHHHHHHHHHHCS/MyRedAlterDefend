@@ -18,6 +18,9 @@ public class SoldierEnergyCostStrategy : IEnergyCostStrategy
             case SoldierType.Captain:
                 energy = 70;
                 break;
+            case SoldierType.Captive:
+                energy = 0;
+                break;
         }
         energy += (_lv - 1) * 2;
         energy = Mathf.Clamp(energy, 0, 100);
@@ -37,6 +40,9 @@ public class SoldierEnergyCostStrategy : IEnergyCostStrategy
                 break;
             case SoldierType.Captain:
                 energy = 20;
+                break;
+            case SoldierType.Captive:
+                energy = 10;
                 break;
             default:
                 break;
