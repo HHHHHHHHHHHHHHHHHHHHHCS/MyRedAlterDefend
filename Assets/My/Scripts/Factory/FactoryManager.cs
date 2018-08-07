@@ -16,7 +16,7 @@ public static class FactoryManager
         {
             if (_assetFactory == null)
             {
-                _assetFactory = new ResourcesFactory();
+                _assetFactory = new ResourcesAssetProxyFactory();
             }
             return _assetFactory;
         }
